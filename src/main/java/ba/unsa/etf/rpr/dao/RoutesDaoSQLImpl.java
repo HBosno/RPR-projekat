@@ -11,6 +11,10 @@ import java.util.Map;
  */
 
 public class RoutesDaoSQLImpl extends AbstractDao<Route> implements RoutesDao {
+    public RoutesDaoSQLImpl(String tableName) {
+        super(tableName);
+    }
+
     @Override
     public Route row2object(ResultSet rs) {
         return null;

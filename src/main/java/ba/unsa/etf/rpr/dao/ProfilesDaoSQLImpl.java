@@ -12,6 +12,9 @@ import java.util.Map;
 
 public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements ProfilesDao{
 
+    public ProfilesDaoSQLImpl(String tableName) {
+        super(tableName);
+    }
 
     @Override
     public Profile row2object(ResultSet rs) {

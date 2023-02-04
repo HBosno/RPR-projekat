@@ -11,6 +11,10 @@ import java.util.Map;
  */
 
 public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> implements RoutesFavouritesDao {
+    public RoutesFavouritesDaoSQLImpl(String tableName) {
+        super(tableName);
+    }
+
     @Override
     public RouteFavourite row2object(ResultSet rs) {
         return null;

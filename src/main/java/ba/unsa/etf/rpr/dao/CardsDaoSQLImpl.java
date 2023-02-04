@@ -12,6 +12,10 @@ import java.util.Map;
 
 public class CardsDaoSQLImpl extends  AbstractDao<Card> implements CardsDao{
 
+    public CardsDaoSQLImpl(String tableName) {
+        super(tableName);
+    }
+
     @Override
     public Card row2object(ResultSet rs) {
         return null;
