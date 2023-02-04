@@ -6,5 +6,5 @@ package ba.unsa.etf.rpr.dao;
  * @author Hamza Bosno
  */
 
-public interface RoutesDao {
+public interface RoutesDao extends Dao<RoutesDao> {
 }

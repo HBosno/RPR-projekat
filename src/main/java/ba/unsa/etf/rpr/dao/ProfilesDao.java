@@ -6,6 +6,6 @@ package ba.unsa.etf.rpr.dao;
  * @author Hamza Bosno
  */
 
-public interface ProfilesDao {
+public interface ProfilesDao extends Dao<ProfilesDao> {
 
 }
