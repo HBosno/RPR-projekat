@@ -32,12 +32,25 @@ public class RoutesDaoSQLImpl extends AbstractDao<Route> implements RoutesDao {
     }
 
     @Override
-    public Route row2object(ResultSet rs) {
-        return null;
+    public Route row2object(ResultSet rs) throws AppException{
+        try {
+            Route route = new Route();
+            route.setId(rs.getInt("id"));
+            route.setRoute(rs.getString("route"));
+            route.setFrequency(rs.getString("frequency"));
+            return route;
+        } catch (SQLException e) {
+            throw new AppException(e.getMessage(), e);
+        }
     }
 
     @Override
     public Map<String, Object> object2row(Route object) {
-        return null;
+        Map<String, Object> map = new TreeMap<>();
+        map.put("id", object.getId());
+        map.put("route", object.getRoute());
+        map.put("frequency", object.getFrequency());
+        return map;
     }
+
 }
