@@ -59,4 +59,12 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
         return map;
     }
 
+    public Card searchBySerialNumber(String serialno){
+        try {
+            return (Card) executeQuery("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno});
+        } catch (AppException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
