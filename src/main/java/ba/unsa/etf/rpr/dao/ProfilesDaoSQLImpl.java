@@ -33,13 +33,33 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
     }
 
     @Override
-    public Profile row2object(ResultSet rs) {
-        return null;
+    public Profile row2object(ResultSet rs) throws AppException{
+        try {
+            Profile profile = new Profile();
+            profile.setId(rs.getInt("id"));
+            profile.setName(rs.getString("name"));
+            profile.setSurname(rs.getString("surname"));
+            profile.setPassword(rs.getString("password"));
+            profile.setEmail(rs.getString("email"));
+            profile.setAdress(rs.getString("adress"));
+            profile.setTelephoneNumber(rs.getString("telephone_number"));
+            return profile;
+        } catch (SQLException e) {
+            throw new AppException(e.getMessage(), e);
+        }
     }
 
     @Override
     public Map<String, Object> object2row(Profile object) {
-        return null;
+        Map<String, Object> map = new TreeMap<>();
+        map.put("id", object.getId());
+        map.put("name", object.getName());
+        map.put("surname", object.getSurname());
+        map.put("password", object.getPassword());
+        map.put("email", object.getEmail());
+        map.put("adress", object.getAdress());
+        map.put("telephone_number", object.getTelephoneNumber());
+        return map;
     }
 
 }
