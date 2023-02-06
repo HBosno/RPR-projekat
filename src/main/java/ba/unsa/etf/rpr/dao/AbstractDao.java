@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Idable;
+import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.*;
 import java.util.*;
@@ -55,7 +56,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      * @param rs - result set from database
      * @return a Bean object for specific table
      */
-    public abstract T row2object(ResultSet rs);
+    public abstract T row2object(ResultSet rs) throws AppException;
 
     /**
      * Method for mapping Object into Map
@@ -64,27 +65,26 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      */
     public abstract Map<String, Object> object2row(T object);
 
-    public T getById(int id){
+    public T getById(int id) throws AppException{
         return executeQueryUnique("SELECT * FROM "+this.tableName+" WHERE id = ?", new Object[]{id});
     }
 
-    public List<T> getAll(){
+    public List<T> getAll() throws AppException{
         return executeQuery("SELECT * FROM "+ tableName, null);
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws AppException{
         String sql = "DELETE FROM "+tableName+" WHERE id = ?";
         try{
             PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
             stmt.executeUpdate();
         }catch (SQLException e){
-            //ovdje je bio quoteexception
-            throw new RuntimeException(e.getMessage());
+            throw new AppException(e.getMessage(), e);
         }
     }
 
-    public T add(T item){
+    public T add(T item) throws AppException{
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row);
 
@@ -110,12 +110,11 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
             return item;
         }catch (SQLException e){
-//            quoteexception
-            throw new RuntimeException(e.getMessage());
+            throw new AppException(e.getMessage(), e);
         }
     }
 
-    public T update(T item){
+    public T update(T item) throws AppException{
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row);
         StringBuilder builder = new StringBuilder();
@@ -137,8 +136,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
-            //            quoteexception
-            throw new RuntimeException(e.getMessage());
+            throw new AppException(e.getMessage(), e);
         }
     }
 
@@ -148,7 +146,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      * @param params - params for query
      * @return List of objects from database
      */
-    public List<T> executeQuery(String query, Object[] params){
+    public List<T> executeQuery(String query, Object[] params) throws AppException{
         try {
             PreparedStatement stmt = getConnection().prepareStatement(query);
             if (params != null){
@@ -164,7 +162,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             return resultList;
         } catch (SQLException e) {
             //            quoteexception
-            throw new RuntimeException(e.getMessage());
+            throw new AppException(e.getMessage(), e);
         }
     }
 
@@ -175,13 +173,12 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      * @return Object
      *
      */
-    public T executeQueryUnique(String query, Object[] params) {
+    public T executeQueryUnique(String query, Object[] params) throws AppException{
         List<T> result = executeQuery(query, params);
         if (result != null && result.size() == 1){
             return result.get(0);
         }else{
-            //quoteexception
-            throw new RuntimeException("Object not found");
+            throw new AppException("Object not found");
         }
     }
 

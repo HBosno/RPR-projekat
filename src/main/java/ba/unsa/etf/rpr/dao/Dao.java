@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.exceptions.AppException;
+
 import java.util.List;
 
 public interface Dao<T>{
@@ -10,7 +12,7 @@ public interface Dao<T>{
      * @return Entity from database
      */
 
-    T getById(int id);
+    T getById(int id) throws AppException;
 
     /**
      * Saves entity into database
@@ -18,7 +20,7 @@ public interface Dao<T>{
      * @return saved item with id field populated
      */
 
-    T add(T item);
+    T add(T item) throws AppException;
 
     /**
      * Fully updates entity in database based on id (primary) match.
@@ -26,18 +28,18 @@ public interface Dao<T>{
      * @return updated version of bean
      */
 
-    T update(T item);
+    T update(T item) throws AppException;
 
     /**
      * Hard delete of item from database with given id
      * @param id - primary key of entity
      */
 
-    void delete(int id);
+    void delete(int id) throws AppException;
 
     /**
      * Lists all entities from database. WARNING: Very slow operation because it reads all records.
      * @return List of entities from database
      */
-    List<T> getAll();
+    List<T> getAll() throws AppException;
 }
