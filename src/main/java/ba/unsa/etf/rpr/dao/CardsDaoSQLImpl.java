@@ -32,12 +32,31 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
     }
 
     @Override
-    public Card row2object(ResultSet rs) {
-        return null;
+    public Card row2object(ResultSet rs) throws AppException {
+        try {
+            Card card = new Card();
+            card.setId(rs.getInt("id"));
+            card.setSerialNumber(rs.getInt("serial_number"));
+            card.setCardType(rs.getString("card_type"));
+            card.setBalance(rs.getDouble("balance"));
+            card.setMonthlyCoupon(rs.getBoolean("monthly_coupon"));
+            card.setProfile(DaoFactory.profilesDao().getById(rs.getInt("profile_id")));
+            return card;
+        } catch (SQLException e) {
+            throw new AppException(e.getMessage(), e);
+        }
     }
 
     @Override
     public Map<String, Object> object2row(Card object) {
-        return null;
+        Map<String, Object> map = new TreeMap<>();
+        map.put("id", object.getId());
+        map.put("serial_number", object.getSerialNumber());
+        map.put("card_type", object.getCardType());
+        map.put("balance", object.getBalance());
+        map.put("monthly_coupon", object.isMonthlyCoupon());
+        map.put("profile_id", object.getProfile().getId());
+        return map;
     }
+
 }
