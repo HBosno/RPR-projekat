@@ -32,12 +32,25 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
     }
 
     @Override
-    public RouteFavourite row2object(ResultSet rs) {
-        return null;
+    public RouteFavourite row2object(ResultSet rs) throws AppException{
+        try {
+            RouteFavourite routeFavourite = new RouteFavourite();
+            routeFavourite.setId(rs.getInt("id"));
+            routeFavourite.setProfile(DaoFactory.profilesDao().getById(rs.getInt("profile_id")));
+            routeFavourite.setRoute(DaoFactory.routesDao().getById(rs.getInt("route_id")));
+            return routeFavourite;
+        } catch (SQLException e) {
+            throw new AppException(e.getMessage(), e);
+        }
     }
 
     @Override
     public Map<String, Object> object2row(RouteFavourite object) {
-        return null;
+        Map<String, Object> map = new TreeMap<>();
+        map.put("id", object.getId());
+        map.put("profile_id", object.getProfile().getId());
+        map.put("route_id", object.getRoute().getId());
+        return map;
     }
+
 }
