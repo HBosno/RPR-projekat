@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.domain.Card;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
@@ -59,12 +60,8 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
         return map;
     }
 
-    public Card searchBySerialNumber(String serialno){
-        try {
-            return (Card) executeQuery("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno});
-        } catch (AppException e) {
-            throw new RuntimeException(e);
-        }
+    public Card searchBySerialNumber(String serialno) throws AppException{
+        return (Card) executeQuery("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno});
     }
 
 }

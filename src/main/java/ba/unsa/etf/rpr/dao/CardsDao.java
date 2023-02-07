@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Card;
+import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.util.List;
 
@@ -19,6 +20,6 @@ public interface CardsDao extends Dao<Card>{
      * @return requested card
      */
 
-    Card searchBySerialNumber(String serialno);
+    Card searchBySerialNumber(String serialno) throws AppException;
 
 }
