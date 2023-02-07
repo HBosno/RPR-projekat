@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -51,6 +52,11 @@ public class RoutesDaoSQLImpl extends AbstractDao<Route> implements RoutesDao {
         map.put("route", object.getRoute());
         map.put("frequency", object.getFrequency());
         return map;
+    }
+
+    @Override
+    public List<Route> searchByStartingPoint(String start) throws AppException{
+        return executeQuery("SELECT * FROM routes WHERE route LIKE concat(?, '%')", new Object[]{start});
     }
 
 }
