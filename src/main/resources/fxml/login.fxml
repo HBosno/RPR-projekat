@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="418.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane prefHeight="418.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.LoginController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" />
   </columnConstraints>
@@ -59,7 +59,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
                </HBox.margin>
             </Label>
-            <Hyperlink text="Registrujte se" textFill="#000000fa">
+            <Hyperlink fx:id="registerLink" onAction="#registerLinkOnClick" text="Registrujte se" textFill="#000000fa">
                <HBox.margin>
                   <Insets bottom="20.0" right="20.0" top="27.0" />
                </HBox.margin>
@@ -67,7 +67,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Hyperlink>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="58.0" prefWidth="190.0" text="Prijavi se">
+            <Button fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#loginButtonOnClick" prefHeight="58.0" prefWidth="190.0" text="Prijavi se">
                <HBox.margin>
                   <Insets left="70.0" top="10.0" />
                </HBox.margin>
