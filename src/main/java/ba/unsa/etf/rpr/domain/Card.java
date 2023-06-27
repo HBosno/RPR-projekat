@@ -13,7 +13,7 @@ public class Card implements Idable, Serializable{
 
     private int id;
     private int serialNumber;
-    private String cardType;
+    private CardType cardType;
     private double balance;
     private boolean monthlyCoupon;
     private Profile profile;
@@ -30,7 +30,7 @@ public class Card implements Idable, Serializable{
         return serialNumber;
     }
 
-    public String getCardType() {
+    public CardType getCardType() {
         return cardType;
     }
 
@@ -50,7 +50,7 @@ public class Card implements Idable, Serializable{
         this.serialNumber = serialNumber;
     }
 
-    public void setCardType(String cardType) {
+    public void setCardType(CardType cardType) {
         this.cardType = cardType;
     }
 
