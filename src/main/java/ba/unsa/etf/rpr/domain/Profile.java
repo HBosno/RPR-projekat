@@ -19,6 +19,8 @@ public class Profile implements Idable, Serializable{
     private String adress;
     private String telephoneNumber;
 
+    public Profile(){}
+
     public int getId() {
         return id;
     }

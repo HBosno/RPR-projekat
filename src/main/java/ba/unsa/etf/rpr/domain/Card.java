@@ -18,6 +18,8 @@ public class Card implements Idable, Serializable{
     private boolean monthlyCoupon;
     private Profile profile;
 
+    public Card(){}
+
     public int getId() {
         return id;
     }

@@ -15,6 +15,8 @@ public class Route implements Idable, Serializable{
     private String route;
     private String frequency;
 
+    public Route(){}
+
     public int getId() {
         return id;
     }
