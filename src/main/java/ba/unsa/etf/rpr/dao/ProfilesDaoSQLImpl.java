@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -62,4 +63,17 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
         return map;
     }
 
+    @Override
+    public Profile findProfileByEmail(String email) throws AppException {
+        try{
+            List<Profile> profile = executeQuery("SELECT * FROM profiles WHERE email = ?", new Object[]{email});
+            if(profile.isEmpty()){
+                throw new AppException("No results");
+            }
+            return profile.get(0);
+        }
+        catch (AppException e) {
+            return null;
+        }
+    }
 }

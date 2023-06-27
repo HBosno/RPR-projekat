@@ -161,7 +161,6 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             }
             return resultList;
         } catch (SQLException e) {
-            //            quoteexception
             throw new AppException(e.getMessage(), e);
         }
     }
