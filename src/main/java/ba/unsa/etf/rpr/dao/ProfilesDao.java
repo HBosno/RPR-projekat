@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Profile;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
+import java.util.List;
+
 /**
  * Dao interface for Profiles domain bean
  *
@@ -10,5 +12,5 @@ import ba.unsa.etf.rpr.exceptions.AppException;
  */
 
 public interface ProfilesDao extends Dao<Profile> {
-    Profile findProfileByEmail(String email) throws AppException;
+    List<Profile> findProfileByEmail(String email) throws AppException;
 }

@@ -4,17 +4,24 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Profile;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
+import java.util.List;
+
 public class ProfileManager {
 
     public boolean validateLogin(String email, String password){
-        Profile profile;
+        List<Profile> profiles;
         try{
-            profile = DaoFactory.profilesDao().findProfileByEmail(email);
+            profiles = DaoFactory.profilesDao().findProfileByEmail(email);
         }
         catch(AppException e){
+            e.printStackTrace();
             return false;
         }
-        return profile.getPassword() == password;
+        if(profiles.isEmpty()){
+            return false;
+        }
+        Profile profile = profiles.get(0);
+        return profile.getPassword().equals(password);
     }
 
 }

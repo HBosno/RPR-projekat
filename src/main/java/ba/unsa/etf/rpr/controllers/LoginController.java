@@ -14,7 +14,7 @@ public class LoginController {
 
     public void loginButtonOnClick(ActionEvent actionEvent) {
         if(profileManager.validateLogin(emailField.getText(), passwordField.getText())){
-            // otvori dashboard fxml
+            emailField.setText("radi");
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
