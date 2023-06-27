@@ -2,10 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.ProfileManager;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class LoginController {
 
@@ -16,7 +13,16 @@ public class LoginController {
     public PasswordField passwordField;
 
     public void loginButtonOnClick(ActionEvent actionEvent) {
-
+        if(profileManager.validateLogin(emailField.getText(), passwordField.getText())){
+            // otvori dashboard fxml
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Upozorenje");
+            alert.setHeaderText("Neispravni podaci!");
+            alert.setContentText("Email adresa i/ili password nisu ispravni.");
+            alert.showAndWait();
+        }
     }
 
     public void registerLinkOnClick(ActionEvent actionEvent) {
