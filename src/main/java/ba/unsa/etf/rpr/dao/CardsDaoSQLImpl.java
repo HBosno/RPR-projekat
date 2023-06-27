@@ -62,7 +62,7 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
 
     @Override
     public Card searchBySerialNumber(String serialno) throws AppException{
-        return (Card) executeQuery("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno});
+        return executeQuery("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno}).get(0);
     }
 
 }
