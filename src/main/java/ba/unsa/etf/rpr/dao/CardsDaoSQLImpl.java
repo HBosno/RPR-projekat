@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.domain.Card;
+import ba.unsa.etf.rpr.domain.CardType;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.ResultSet;
@@ -38,7 +39,7 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
             Card card = new Card();
             card.setId(rs.getInt("id"));
             card.setSerialNumber(rs.getInt("serial_number"));
-            card.setCardType(rs.getString("card_type"));
+            card.setCardType(CardType.valueOf(rs.getString("card_type")));
             card.setBalance(rs.getDouble("balance"));
             card.setMonthlyCoupon(rs.getBoolean("monthly_coupon"));
             card.setProfile(DaoFactory.profilesDao().getById(rs.getInt("profile_id")));
@@ -53,7 +54,7 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
         Map<String, Object> map = new TreeMap<>();
         map.put("id", object.getId());
         map.put("serial_number", object.getSerialNumber());
-        map.put("card_type", object.getCardType());
+        map.put("card_type", object.getCardType().toString());
         map.put("balance", object.getBalance());
         map.put("monthly_coupon", object.isMonthlyCoupon());
         map.put("profile_id", object.getProfile().getId());
