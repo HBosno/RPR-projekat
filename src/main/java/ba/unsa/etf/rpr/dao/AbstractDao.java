@@ -77,6 +77,10 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         return executeQueryUnique("SELECT * FROM "+this.tableName+" WHERE id = ?", new Object[]{id});
     }
 
+    /**
+     * Method for retrieving every entity from their respective table
+     * @return List of all bean objects
+     */
     public List<T> getAll() throws AppException{
         return executeQuery("SELECT * FROM "+ tableName, null);
     }
