@@ -1,9 +1,8 @@
 package ba.unsa.etf.rpr.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class RegistrationController {
     public TextField emailField;
@@ -12,6 +11,7 @@ public class RegistrationController {
     public TextField surnameField;
     public PasswordField passwordField;
     public Label passwordWarning;
+    public Button registerButton;
 
     @FXML
     public void initialize(){
@@ -56,5 +56,18 @@ public class RegistrationController {
     public boolean validateEmail(String email){
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
+    }
+
+    public void registerButtonOnClick(ActionEvent actionEvent) {
+        if(!(validatePassword(passwordField.getText())) || !(validateEmail(emailField.getText()))){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Upozorenje");
+            alert.setHeaderText("Neispravni podaci!");
+            alert.setContentText("Email adresa i/ili password nisu ispravni.");
+            alert.showAndWait();
+        }
+        else{
+            // otvori login screen
+        }
     }
 }
