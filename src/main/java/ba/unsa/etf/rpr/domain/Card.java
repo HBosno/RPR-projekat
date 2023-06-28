@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * List of registered cards for a user
+ * JavaBean class for modelling a list of registered cards for a user
  *
  * @author Hamza Bosno
  */
