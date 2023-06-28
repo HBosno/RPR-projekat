@@ -29,9 +29,16 @@ public class LoginController {
      * Method modelling an OnClick button listener for login button. Validates entered data and proceeds accordingly.
      * @param actionEvent
      */
-    public void loginButtonOnClick(ActionEvent actionEvent) {
+    public void loginButtonOnClick(ActionEvent actionEvent) throws IOException {
         if(profileManager.validateLogin(emailField.getText(), passwordField.getText())){
-            emailField.setText("radi");
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
+            loader.setController(new DashboardController(emailField.getText()));
+            stage.setTitle("JavniPrevozKS");
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("img/icon.png"));
+            stage.show();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
