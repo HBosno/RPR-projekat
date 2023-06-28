@@ -1,16 +1,26 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.ProfileManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
  * Controller for managing registration screen interactions
  * @author Hamza Bosno
  */
 public class RegistrationController {
+
+    private final ProfileManager profileManager = new ProfileManager();
     public TextField emailField;
     public Label emailWarning;
     public TextField nameField;
@@ -68,7 +78,7 @@ public class RegistrationController {
      * Method modelling an OnClick listener for register button. Redirects user to login screen if valid data is entered, user is alerted otherwise.
      * @param actionEvent
      */
-    public void registerButtonOnClick(ActionEvent actionEvent) {
+    public void registerButtonOnClick(ActionEvent actionEvent) throws IOException {
         if(!(validatePassword(passwordField.getText())) || !(validateEmail(emailField.getText()))){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Upozorenje");
@@ -79,7 +89,16 @@ public class RegistrationController {
             alert.showAndWait();
         }
         else{
-            // otvori login screen
+            profileManager.addToDatabase(nameField.getText(), surnameField.getText(), passwordField.getText(), emailField.getText());
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+            stage.setTitle("JavniPrevozKS");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.getIcons().add(new Image("img/icon.png"));
+            stage.setResizable(false);
+            stage.show();
+            Stage currentStage = (Stage) registerButton.getScene().getWindow();
+            currentStage.close();
         }
     }
 }
