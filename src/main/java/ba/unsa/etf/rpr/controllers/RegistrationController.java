@@ -26,6 +26,15 @@ public class RegistrationController {
         return password.matches(passwordRegex);
     }
 
+    /**
+     * [A-Za-z0-9._%+-]+ matches one or more alphanumeric characters, dots, underscores, percent signs, plus signs, or hyphens for the email username part.
+     * @ matches the "@" symbol.
+     * [A-Za-z0-9.-]+ matches one or more alphanumeric characters, dots, or hyphens for the domain name part.
+     * \\. matches the dot (.) symbol, which needs to be escaped with double backslashes in Java.
+     * [A-Za-z]{2,} matches two or more alphabetic characters for the top-level domain (TLD).
+     * @param email - email user entered on registration screen
+     * @return true if email matches email regex, false otherwise
+     */
     public boolean validateEmail(String email){
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
