@@ -31,6 +31,11 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
             instance=null;
     }
 
+    /**
+     * Method for mapping a record in table to corresponding RouteFavourite bean object.
+     * @param rs - result set from database
+     * @return RouteFavourite bean
+     */
     @Override
     public RouteFavourite row2object(ResultSet rs) throws AppException{
         try {
