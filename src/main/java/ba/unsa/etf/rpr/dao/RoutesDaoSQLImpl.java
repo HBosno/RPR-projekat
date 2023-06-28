@@ -50,6 +50,11 @@ public class RoutesDaoSQLImpl extends AbstractDao<Route> implements RoutesDao {
         }
     }
 
+    /**
+     * Method for mapping a Route bean object to corresponding table record.
+     * @param object - a Route object for specific table
+     * @return map containing columns with respective values, keys being column names
+     */
     @Override
     public Map<String, Object> object2row(Route object) {
         Map<String, Object> map = new TreeMap<>();
