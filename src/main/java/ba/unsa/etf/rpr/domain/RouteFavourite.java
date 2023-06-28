@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * List of routes of interest for certain profiles
+ * JavaBean class for modelling a list of routes of interest for different users
  *
  * @author Hamza Bosno
  */
