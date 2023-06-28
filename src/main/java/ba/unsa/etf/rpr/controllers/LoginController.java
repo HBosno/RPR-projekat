@@ -38,6 +38,8 @@ public class LoginController {
             alert.setTitle("Upozorenje");
             alert.setHeaderText("Neispravni podaci!");
             alert.setContentText("Email adresa i/ili password nisu ispravni.");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("img/icon.png"));
             alert.showAndWait();
         }
     }

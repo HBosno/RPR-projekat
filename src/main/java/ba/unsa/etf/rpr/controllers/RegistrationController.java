@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class RegistrationController {
     public TextField emailField;
@@ -64,6 +66,8 @@ public class RegistrationController {
             alert.setTitle("Upozorenje");
             alert.setHeaderText("Neispravni podaci!");
             alert.setContentText("Email adresa i/ili password nisu ispravni.");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("img/icon.png"));
             alert.showAndWait();
         }
         else{
