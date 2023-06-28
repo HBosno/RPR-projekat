@@ -99,6 +99,12 @@ public class RegistrationController {
             stage.show();
             Stage currentStage = (Stage) registerButton.getScene().getWindow();
             currentStage.close();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Obavijest");
+            alert.setHeaderText("Uspješna registracija!");
+            alert.setContentText("Možete se sada prijaviti na vaš račun.");
+            stage.getIcons().add(new Image("img/icon.png"));
+            alert.showAndWait();
         }
     }
 }
