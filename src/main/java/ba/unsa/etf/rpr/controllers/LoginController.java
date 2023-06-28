@@ -2,7 +2,15 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.ProfileManager;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
  * Controller for managing login screen interactions
@@ -37,6 +45,12 @@ public class LoginController {
      * Method modelling an OnClick listener for register hyperlink. Redirects user to registration screen.
      * @param actionEvent
      */
-    public void registerLinkOnClick(ActionEvent actionEvent) {
+    public void registerLinkOnClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/registration.fxml"));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 }
