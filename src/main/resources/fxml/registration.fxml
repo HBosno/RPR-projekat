@@ -71,7 +71,7 @@
                   <Insets bottom="20.0" left="20.0" right="50.0" top="20.0" />
                </VBox.margin>
             </PasswordField>
-            <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="78.0" text="Registruj se">
+            <Button minHeight="35.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="78.0" text="Registruj se">
                <VBox.margin>
                   <Insets left="250.0" />
                </VBox.margin>
