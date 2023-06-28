@@ -64,14 +64,14 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     /**
      * Method for mapping Object into Map
      * @param object - a bean object for specific table
-     * @return - key, value sorted map of object
+     * @return key, value sorted map of object
      */
     public abstract Map<String, Object> object2row(T object);
 
     /**
      * Method for retrieving entities from database by id
      * @param id primary key of entity
-     * @return - a bean object with specified id value
+     * @return bean object with specified id value
      */
     public T getById(int id) throws AppException{
         return executeQueryUnique("SELECT * FROM "+this.tableName+" WHERE id = ?", new Object[]{id});
@@ -79,7 +79,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
     /**
      * Method for retrieving every entity from their respective table
-     * @return - List of all bean objects
+     * @return List of all bean objects
      */
     public List<T> getAll() throws AppException{
         return executeQuery("SELECT * FROM "+ tableName, null);
@@ -103,7 +103,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     /**
      * Method for inserting a record into table by providing a bean object
      * @param - item bean for saving to database
-     * @return - saved bean
+     * @return saved bean
      */
     public T add(T item) throws AppException{
         Map<String, Object> row = object2row(item);
@@ -138,7 +138,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     /**
      * Method for altering a table by updating the row with provided bean object
      * @param item - bean to be updated. id must be populated
-     * @return - bean to be updated
+     * @return bean to be updated
      */
     public T update(T item) throws AppException{
         Map<String, Object> row = object2row(item);
