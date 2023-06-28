@@ -16,6 +16,10 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * Controller for managing dashboard interactions
+ * @author Hamza Bosno
+ */
 public class DashboardController {
 
     private final ProfileManager profileManager = new ProfileManager();
