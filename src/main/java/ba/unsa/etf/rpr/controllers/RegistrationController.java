@@ -6,6 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * Controller for managing registration screen interactions
+ * @author Hamza Bosno
+ */
 public class RegistrationController {
     public TextField emailField;
     public Label emailWarning;
