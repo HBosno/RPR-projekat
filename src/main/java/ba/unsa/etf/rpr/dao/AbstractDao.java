@@ -64,7 +64,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     /**
      * Method for mapping Object into Map
      * @param object - a bean object for specific table
-     * @return key, value sorted map of object
+     * @return - key, value sorted map of object
      */
     public abstract Map<String, Object> object2row(T object);
 
@@ -79,7 +79,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
     /**
      * Method for retrieving every entity from their respective table
-     * @return List of all bean objects
+     * @return - List of all bean objects
      */
     public List<T> getAll() throws AppException{
         return executeQuery("SELECT * FROM "+ tableName, null);
@@ -100,6 +100,11 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         }
     }
 
+    /**
+     * Method for inserting a record into table by providing a bean object
+     * @param - item bean for saving to database
+     * @return - saved bean
+     */
     public T add(T item) throws AppException{
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row);
