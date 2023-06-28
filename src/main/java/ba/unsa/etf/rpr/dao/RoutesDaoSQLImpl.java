@@ -32,6 +32,11 @@ public class RoutesDaoSQLImpl extends AbstractDao<Route> implements RoutesDao {
             instance=null;
     }
 
+    /**
+     * Method for mapping a record in table to corresponding Route bean object.
+     * @param rs - result set from database
+     * @return Route bean
+     */
     @Override
     public Route row2object(ResultSet rs) throws AppException{
         try {
