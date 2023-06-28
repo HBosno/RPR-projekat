@@ -56,6 +56,11 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
         }
     }
 
+    /**
+     * Method for mapping a Profile bean object to corresponding table record.
+     * @param object - a Profile object for specific table
+     * @return map containing columns with respective values, keys being column names
+     */
     @Override
     public Map<String, Object> object2row(Profile object) {
         Map<String, Object> map = new TreeMap<>();
