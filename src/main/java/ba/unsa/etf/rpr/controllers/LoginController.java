@@ -39,6 +39,8 @@ public class LoginController {
             stage.setResizable(false);
             stage.getIcons().add(new Image("img/icon.png"));
             stage.show();
+            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+            currentStage.close();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
