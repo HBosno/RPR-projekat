@@ -21,6 +21,9 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         createConnection();
     }
 
+    /**
+     * Method for establishing connection to MySQL database. Called on instance creation.
+     */
     private static void createConnection(){
         if(AbstractDao.connection==null) {
             try {
