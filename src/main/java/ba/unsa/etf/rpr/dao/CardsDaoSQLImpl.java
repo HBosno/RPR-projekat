@@ -61,6 +61,11 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
         return map;
     }
 
+    /**
+     * Method executing an sql query for retrieving a card with specified serial number attribute.
+     * @param serialno - card serial number to search for
+     * @return requested Card bean
+     */
     @Override
     public Card searchBySerialNumber(String serialno) throws AppException{
         try{
