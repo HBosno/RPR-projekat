@@ -25,8 +25,8 @@ public class RegistrationController {
             if(validatePassword(newValue))
                 passwordWarning.setText("");
             else
-                passwordWarning.setText("Password mora sadržavati najmanje 5 karaktera, barem jednu cifru, barem jedan posebni karakter, "
-                        + "barem jedno veliko slovo i barem jedno malo slovo");
+                passwordWarning.setText("Password mora sadržavati najmanje 5 karaktera, \nbarem jednu cifru, barem jedan posebni karakter, \n"
+                        + "barem jedno veliko slovo i barem jedno malo slovo!");
         });
     }
 
