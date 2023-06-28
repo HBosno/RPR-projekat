@@ -49,6 +49,11 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
         }
     }
 
+    /**
+     * Method for mapping a RouteFavourite bean object to corresponding table record.
+     * @param object - a RouteFavourite object for specific table
+     * @return map containing columns with respective values, keys being column names
+     */
     @Override
     public Map<String, Object> object2row(RouteFavourite object) {
         Map<String, Object> map = new TreeMap<>();
