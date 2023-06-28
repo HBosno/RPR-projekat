@@ -33,6 +33,11 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
             instance=null;
     }
 
+    /**
+     * Method for mapping a record in table to corresponding Card bean object.
+     * @param rs - result set from database
+     * @return Card bean
+     */
     @Override
     public Card row2object(ResultSet rs) throws AppException {
         try {
