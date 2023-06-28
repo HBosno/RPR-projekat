@@ -4,6 +4,11 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.util.List;
 
+/**
+ * Dao interface containing function prototypes for core CRUD methods.
+ * @param <T> - T is a JavaBean class to be worked with
+ * @author Hamza Bosno
+ */
 public interface Dao<T>{
 
     /**
