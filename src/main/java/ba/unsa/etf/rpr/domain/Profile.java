@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Contains data for different users
+ * JavaBean class modelling a profile containing data for different users
  *
  * @author Hamza Bosno
  */
