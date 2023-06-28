@@ -6,6 +6,10 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.util.List;
 
+/**
+ * Business logic layer for managing profiles.
+ * @author Hamza Bosno
+ */
 public class ProfileManager {
 
     public boolean validateLogin(String email, String password){
