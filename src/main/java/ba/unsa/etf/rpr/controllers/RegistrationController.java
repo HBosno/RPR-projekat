@@ -60,6 +60,10 @@ public class RegistrationController {
         return email.matches(emailRegex);
     }
 
+    /**
+     * Method modelling an OnClick listener for register button. Redirects user to login screen if valid data is entered, user is alerted otherwise.
+     * @param actionEvent
+     */
     public void registerButtonOnClick(ActionEvent actionEvent) {
         if(!(validatePassword(passwordField.getText())) || !(validateEmail(emailField.getText()))){
             Alert alert = new Alert(Alert.AlertType.WARNING);
