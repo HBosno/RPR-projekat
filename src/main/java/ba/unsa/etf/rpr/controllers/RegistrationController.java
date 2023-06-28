@@ -25,4 +25,9 @@ public class RegistrationController {
         String passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{5,}$";
         return password.matches(passwordRegex);
     }
+
+    public boolean validateEmail(String email){
+        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(emailRegex);
+    }
 }
