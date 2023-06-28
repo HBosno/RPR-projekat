@@ -12,6 +12,15 @@ public class RegistrationController {
     public PasswordField passwordField;
     public Label passwordWarning;
 
+    /**
+     * (?=.*[0-9]) asserts that there is at least one digit.
+     * (?=.*[!@#$%^&*]) asserts that there is at least one special character.
+     * (?=.*[a-z]) asserts that there is at least one lowercase letter.
+     * (?=.*[A-Z]) asserts that there is at least one uppercase letter.
+     * .{5,} matches any character (except newline) at least 5 times.
+     * @param password - password user entered on registration screen
+     * @return true if password matches password regex, false otherwise
+     */
     public boolean validatePassword(String password){
         String passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{5,}$";
         return password.matches(passwordRegex);
