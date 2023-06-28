@@ -54,5 +54,7 @@ public class LoginController {
         stage.getIcons().add(new Image("img/icon.png"));
         stage.setResizable(false);
         stage.show();
+        Stage currentStage = (Stage) loginButton.getScene().getWindow();
+        currentStage.close();
     }
 }
