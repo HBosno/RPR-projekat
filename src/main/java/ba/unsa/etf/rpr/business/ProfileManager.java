@@ -44,7 +44,7 @@ public class ProfileManager {
      */
     public void addToDatabase(String name, String surname, String password, String email){
         try{
-            DaoFactory.profilesDao().add(new Profile(-1, name, surname, password, email, "", ""));
+            DaoFactory.profilesDao().add(new Profile(-1, name, surname, password, email, null, null));
         }
         catch(AppException e){
             e.printStackTrace();
