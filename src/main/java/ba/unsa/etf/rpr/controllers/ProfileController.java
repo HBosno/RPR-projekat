@@ -4,6 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+/**
+ * Controller for profile editing screen
+ * @author Hamza Bosno
+ */
 public class ProfileController {
     public TextField emailField;
     public TextField nameField;
