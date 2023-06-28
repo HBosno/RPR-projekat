@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Contains bus routes
+ * JavaBean class modelling a single bus route
  *
  * @author Hamza Bosno
  */
