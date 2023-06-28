@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -11,6 +12,23 @@ public class RegistrationController {
     public TextField surnameField;
     public PasswordField passwordField;
     public Label passwordWarning;
+
+    @FXML
+    public void initialize(){
+        emailField.textProperty().addListener((obs, oldValue, newValue)->{
+            if(validateEmail(newValue))
+                emailWarning.setText("");
+            else
+                emailWarning.setText("Neispravna email adresa!");
+        });
+        passwordField.textProperty().addListener((obs, oldValue, newValue)->{
+            if(validatePassword(newValue))
+                passwordWarning.setText("");
+            else
+                passwordWarning.setText("Password mora sadržavati najmanje 5 karaktera, barem jednu cifru, barem jedan posebni karakter, "
+                        + "barem jedno veliko slovo i barem jedno malo slovo");
+        });
+    }
 
     /**
      * (?=.*[0-9]) asserts that there is at least one digit.
