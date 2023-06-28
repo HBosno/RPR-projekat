@@ -21,6 +21,16 @@ public class Profile implements Idable, Serializable{
 
     public Profile(){}
 
+    public Profile(int id, String name, String surname, String password, String email, String adress, String telephoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.email = email;
+        this.adress = adress;
+        this.telephoneNumber = telephoneNumber;
+    }
+
     public int getId() {
         return id;
     }

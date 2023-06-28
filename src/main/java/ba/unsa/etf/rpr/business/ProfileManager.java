@@ -35,4 +35,13 @@ public class ProfileManager {
         return profile.getPassword().equals(password);
     }
 
+    public void addToDatabase(String name, String surname, String password, String email){
+        try{
+            DaoFactory.profilesDao().add(new Profile(-1, name, surname, password, email, "", ""));
+        }
+        catch(AppException e){
+            e.printStackTrace();
+        }
+    }
+
 }
