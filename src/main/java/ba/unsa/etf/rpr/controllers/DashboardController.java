@@ -4,8 +4,17 @@ import ba.unsa.etf.rpr.business.ProfileManager;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class DashboardController {
 
@@ -26,7 +35,16 @@ public class DashboardController {
         welcomeLabel.setText("Dobrodošli nazad, " + profileManager.getUserName(userEmail));
     }
 
-    public void logoutButtonOnClick(ActionEvent actionEvent) {
+    public void logoutButtonOnClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.setResizable(false);
+        stage.show();
+        Stage currentStage = (Stage) logoutButton.getScene().getWindow();
+        currentStage.close();
     }
 
     public void editProfileButtonOnClick(ActionEvent actionEvent) {
