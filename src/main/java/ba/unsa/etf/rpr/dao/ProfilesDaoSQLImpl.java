@@ -64,6 +64,11 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
         return map;
     }
 
+    /**
+     * Method executing an sql query for retrieving a profile with specified email attribute.
+     * @param email - email attribute of profile bean
+     * @return list of requested records, size is 0 or 1
+     */
     @Override
     public List<Profile> findProfileByEmail(String email) throws AppException {
         try{
