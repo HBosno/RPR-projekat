@@ -23,7 +23,7 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("JavniPrevozKS");
         primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-   //     primaryStage.getIcons().add(new Image("")); za dodavanje ikonice prozora
+        primaryStage.getIcons().add(new Image("img/icon.png"));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
