@@ -34,6 +34,11 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
             instance=null;
     }
 
+    /**
+     * Method for mapping a record in table to corresponding Profile bean object.
+     * @param rs - result set from database
+     * @return Profile bean
+     */
     @Override
     public Profile row2object(ResultSet rs) throws AppException{
         try {
