@@ -76,7 +76,7 @@
             <Insets top="70.0" />
          </GridPane.margin>
       </HBox>
-      <Label fx:id="welcomeLabel" textFill="#868685" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <Label fx:id="welcomeLabel" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
