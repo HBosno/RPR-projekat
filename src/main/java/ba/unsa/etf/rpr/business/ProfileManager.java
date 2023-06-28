@@ -51,6 +51,11 @@ public class ProfileManager {
         }
     }
 
+    /**
+     * Method for retrieving user's name using his email adress.
+     * @param email - user's email adress
+     * @return username
+     */
     public String getUserName(String email) throws AppException {
         Profile user = DaoFactory.profilesDao().findProfileByEmail(email).get(0);
         return user.getName();
