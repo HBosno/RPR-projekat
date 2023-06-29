@@ -34,6 +34,11 @@ public class ProfileController {
         surnameField.setText(user.getSurname());
         adressField.setText(user.getAdress());
         telephoneField.setText(user.getTelephoneNumber());
+        emailField.setOnKeyTyped(e -> confirmButton.setDisable(false));
+        nameField.setOnKeyTyped(e -> confirmButton.setDisable(false));
+        surnameField.setOnKeyTyped(e -> confirmButton.setDisable(false));
+        adressField.setOnKeyTyped(e -> confirmButton.setDisable(false));
+        telephoneField.setOnKeyTyped(e -> confirmButton.setDisable(false));
     }
 
     public void confirmButtonOnClick(ActionEvent actionEvent) {
