@@ -83,6 +83,10 @@ public class ProfileManager {
         }
     }
 
+    /**
+     * Simple method that calls update CRUD method for updating user's personal information.
+     * @param user - user profile to be updated
+     */
     public void updateProfile(Profile user){
         try{
             DaoFactory.profilesDao().update(user);
