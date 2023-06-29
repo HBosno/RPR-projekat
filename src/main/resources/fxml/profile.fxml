@@ -111,7 +111,7 @@
                   <Insets left="220.0" top="15.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="cancelButton" minHeight="30.0" mnemonicParsing="false" onAction="#cancelButtonOnClick" text="Odustani">
+            <Button fx:id="cancelButton" minHeight="30.0" mnemonicParsing="false" onAction="#cancelButtonOnClick" text="Nazad">
                <HBox.margin>
                   <Insets left="50.0" top="15.0" />
                </HBox.margin>
