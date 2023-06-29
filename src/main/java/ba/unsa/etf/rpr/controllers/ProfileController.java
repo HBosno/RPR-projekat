@@ -59,6 +59,13 @@ public class ProfileController {
             user.setAdress(adressField.getText());
             user.setTelephoneNumber(telephoneField.getText());
             profileManager.updateProfile(user);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Obavijest");
+            alert.setHeaderText("Uspješna izmjena podataka!");
+            alert.setContentText("Vaš račun je ažuriran.");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("img/icon.png"));
+            alert.showAndWait();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
