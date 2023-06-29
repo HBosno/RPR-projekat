@@ -66,6 +66,7 @@ public class ProfileController {
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
             stage.getIcons().add(new Image("img/icon.png"));
             alert.showAndWait();
+            confirmButton.setDisable(true);
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
