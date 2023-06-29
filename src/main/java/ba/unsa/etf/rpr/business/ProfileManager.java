@@ -42,13 +42,8 @@ public class ProfileManager {
      * @param password - entered password on registration screen
      * @param email - entered email on registration screen
      */
-    public void addToDatabase(String name, String surname, String password, String email){
-        try{
-            DaoFactory.profilesDao().add(new Profile(-1, name, surname, password, email, null, null));
-        }
-        catch(AppException e){
-            e.printStackTrace();
-        }
+    public void addToDatabase(String name, String surname, String password, String email) throws AppException {
+        DaoFactory.profilesDao().add(new Profile(-1, name, surname, password, email, null, null));
     }
 
     /**

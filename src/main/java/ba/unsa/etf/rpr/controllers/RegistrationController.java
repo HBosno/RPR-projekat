@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.ProfileManager;
+import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -83,7 +85,7 @@ public class RegistrationController {
      * Method modelling an OnClick listener for register button. Redirects user to login screen if valid data is entered, user is alerted otherwise.
      * @param actionEvent
      */
-    public void registerButtonOnClick(ActionEvent actionEvent) throws IOException {
+    public void registerButtonOnClick(ActionEvent actionEvent) throws IOException{
         if(!(validatePassword(passwordField.getText())) || !(validateEmail(emailField.getText()))){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Upozorenje");
@@ -94,22 +96,33 @@ public class RegistrationController {
             alert.showAndWait();
         }
         else{
-            profileManager.addToDatabase(nameField.getText(), surnameField.getText(), passwordField.getText(), emailField.getText());
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
-            stage.setTitle("JavniPrevozKS");
-            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            stage.getIcons().add(new Image("img/icon.png"));
-            stage.setResizable(false);
-            stage.show();
-            Stage currentStage = (Stage) registerButton.getScene().getWindow();
-            currentStage.close();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Obavijest");
-            alert.setHeaderText("Uspješna registracija!");
-            alert.setContentText("Možete se sada prijaviti na vaš račun.");
-            stage.getIcons().add(new Image("img/icon.png"));
-            alert.showAndWait();
+            try{
+                profileManager.addToDatabase(nameField.getText(), surnameField.getText(), passwordField.getText(), emailField.getText());
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+                stage.setTitle("JavniPrevozKS");
+                stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                stage.getIcons().add(new Image("img/icon.png"));
+                stage.setResizable(false);
+                stage.show();
+                Stage currentStage = (Stage) registerButton.getScene().getWindow();
+                currentStage.close();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Obavijest");
+                alert.setHeaderText("Uspješna registracija!");
+                alert.setContentText("Možete se sada prijaviti na vaš račun.");
+                stage.getIcons().add(new Image("img/icon.png"));
+                alert.showAndWait();
+            }
+            catch(AppException e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Upozorenje");
+                alert.setHeaderText("Podaci već registrovani!");
+                alert.setContentText("Email adresa i/ili password su već u upotrebi.");
+                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(new Image("img/icon.png"));
+                alert.showAndWait();
+            }
         }
     }
 }
