@@ -83,4 +83,12 @@ public class ProfileManager {
         }
     }
 
+    public void updateProfile(Profile user){
+        try{
+            DaoFactory.profilesDao().update(user);
+        } catch (AppException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
