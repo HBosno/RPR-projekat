@@ -61,6 +61,11 @@ public class ProfileManager {
         return user.getName();
     }
 
+    /**
+     * Simple method for fetching a profile based on email. Simply calls findProfileByEmail method and returns the first and only element.
+     * @param email - user's email
+     * @return user profile
+     */
     public Profile getProfileByEmail(String email) throws AppException {
         return DaoFactory.profilesDao().findProfileByEmail(email).get(0);
     }
