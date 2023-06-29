@@ -61,4 +61,8 @@ public class ProfileManager {
         return user.getName();
     }
 
+    public Profile getProfileByEmail(String email) throws AppException {
+        return DaoFactory.profilesDao().findProfileByEmail(email).get(0);
+    }
+
 }
