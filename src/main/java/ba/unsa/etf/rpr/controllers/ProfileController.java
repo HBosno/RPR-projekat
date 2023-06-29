@@ -29,7 +29,11 @@ public class ProfileController {
     }
     @FXML
     public void initialize(){
-
+        emailField.setText(user.getEmail());
+        nameField.setText(user.getName());
+        surnameField.setText(user.getSurname());
+        adressField.setText(user.getAdress());
+        telephoneField.setText(user.getTelephoneNumber());
     }
 
     public void confirmButtonOnClick(ActionEvent actionEvent) {
