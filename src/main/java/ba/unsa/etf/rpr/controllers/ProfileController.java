@@ -37,6 +37,10 @@ public class ProfileController {
     public ProfileController(String email) throws AppException {
         user = profileManager.getProfileByEmail(email);
     }
+
+    /**
+     * Populates textfields with user's info on start. Detects changes after which confirm button becomes enabled.
+     */
     @FXML
     public void initialize(){
         emailField.setText(user.getEmail());
@@ -50,6 +54,11 @@ public class ProfileController {
         adressField.setOnKeyTyped(e -> confirmButton.setDisable(false));
         telephoneField.setOnKeyTyped(e -> confirmButton.setDisable(false));
     }
+
+    /**
+     * On click listener method for confirm button. If email is valid, updates database with new info. User is informed with a popup
+       window, after which confirm button is disabled again. Otherwise, user is alerted that faulty info had been entered.
+     */
 
     public void confirmButtonOnClick(ActionEvent actionEvent) {
         if(validateEmail(emailField.getText())){
@@ -79,10 +88,20 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Regex for validating user email.
+     * @param email - email user entered
+     * @return true if email is valid, false otherwise
+     */
+
     public boolean validateEmail(String email){
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
     }
+
+    /**
+     * Cancel button on click listener method. Closes edit profile window and redirects user to dashboard.
+     */
 
     public void cancelButtonOnClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
