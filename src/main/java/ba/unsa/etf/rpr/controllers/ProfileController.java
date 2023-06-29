@@ -105,11 +105,12 @@ public class ProfileController {
 
     public void cancelButtonOnClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
+        loader.setController(new DashboardController(user.getEmail()));
         stage.setTitle("JavniPrevozKS");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.getIcons().add(new Image("img/icon.png"));
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
+        stage.getIcons().add(new Image("img/icon.png"));
         stage.show();
         Stage currentStage = (Stage) cancelButton.getScene().getWindow();
         currentStage.close();
