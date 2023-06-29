@@ -34,11 +34,17 @@ public class DashboardController {
         userEmail = email;
     }
 
+    /**
+     * Sets up dashboard's welcome label based on signed in user's name from db.
+     */
     @FXML
     public void initialize() throws AppException {
         welcomeLabel.setText("Dobrodošli nazad, " + profileManager.getUserName(userEmail));
     }
 
+    /**
+     * On click listener method for logout button. Redirects user to login screen.
+     */
     public void logoutButtonOnClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
