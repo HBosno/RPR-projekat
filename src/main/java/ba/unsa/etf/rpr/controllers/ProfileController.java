@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -51,6 +52,23 @@ public class ProfileController {
     }
 
     public void confirmButtonOnClick(ActionEvent actionEvent) {
+        if(validateEmail(emailField.getText())){
+            user.setEmail(emailField.getText());
+            user.setName(nameField.getText());
+            user.setSurname(surnameField.getText());
+            user.setAdress(adressField.getText());
+            user.setTelephoneNumber(telephoneField.getText());
+            profileManager.updateProfile(user);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Upozorenje");
+            alert.setHeaderText("Neispravni podaci!");
+            alert.setContentText("Email adresa nije ispravna.");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("img/icon.png"));
+            alert.showAndWait();
+        }
     }
 
     public boolean validateEmail(String email){
