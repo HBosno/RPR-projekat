@@ -29,6 +29,9 @@ public class RegistrationController {
     public Label passwordWarning;
     public Button registerButton;
 
+    /**
+     * Implements on-screen validation for email and password fields via listeners and regex methods.
+     */
     @FXML
     public void initialize(){
         emailField.textProperty().addListener((obs, oldValue, newValue)->{
@@ -47,6 +50,7 @@ public class RegistrationController {
     }
 
     /**
+     * Regex for validating user password.
      * (?=.*[0-9]) asserts that there is at least one digit.
      * (?=.*[!@#$%^&*]) asserts that there is at least one special character.
      * (?=.*[a-z]) asserts that there is at least one lowercase letter.
@@ -61,6 +65,7 @@ public class RegistrationController {
     }
 
     /**
+     * Regex for validating user email.
      * [A-Za-z0-9._%+-]+ matches one or more alphanumeric characters, dots, underscores, percent signs, plus signs, or hyphens for the email username part.
      * @ matches the "@" symbol.
      * [A-Za-z0-9.-]+ matches one or more alphanumeric characters, dots, or hyphens for the domain name part.
