@@ -57,7 +57,17 @@ public class DashboardController {
         currentStage.close();
     }
 
-    public void editProfileButtonOnClick(ActionEvent actionEvent) {
+    public void editProfileButtonOnClick(ActionEvent actionEvent) throws IOException, AppException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        loader.setController(new ProfileController(userEmail));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.show();
+        Stage currentStage = (Stage) editProfileButton.getScene().getWindow();
+        currentStage.close();
     }
 
     public void smartCardButtonOnClick(ActionEvent actionEvent) {
