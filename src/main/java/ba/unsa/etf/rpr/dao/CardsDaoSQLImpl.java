@@ -7,6 +7,7 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -80,6 +81,16 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
     public Card searchBySerialNumber(String serialno) throws AppException{
         try{
             return executeQuery("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno}).get(0);
+        }
+        catch(AppException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Card> getAllByProfileId(int id){
+        try{
+            return executeQuery("SELECT * FROM cards WHERE profile_id = ?", new Object[]{id});
         }
         catch(AppException e){
             e.printStackTrace();
