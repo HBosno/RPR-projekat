@@ -29,10 +29,17 @@ public class CardsController {
     public Button backButton;
     private Profile user;
 
+    /**
+     * Controller constructor for fetching current user profile.
+     * @param email - user email
+     */
     public CardsController(String email) throws AppException {
        user = profileManager.getProfileByEmail(email);
     }
 
+    /**
+     * Initialize method used for populating listview with user's cards' serial numbers.
+     */
     @FXML
     public void initialize() throws AppException {
         List<Card> cards = cardManager.getUserCards(user.getId());
