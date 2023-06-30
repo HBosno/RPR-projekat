@@ -88,6 +88,12 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
         }
     }
 
+    /**
+     * Method executing sql query for retrieving all cards with same profile id foreign key.
+     * @param id - profile foreign key
+     * @return list of cards
+     */
+    @Override
     public List<Card> getAllByProfileId(int id){
         try{
             return executeQuery("SELECT * FROM cards WHERE profile_id = ?", new Object[]{id});

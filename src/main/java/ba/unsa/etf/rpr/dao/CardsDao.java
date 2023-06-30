@@ -22,4 +22,11 @@ public interface CardsDao extends Dao<Card>{
 
     Card searchBySerialNumber(String serialno) throws AppException;
 
+    /**
+     * Return all cards sharing same profile id.
+     * @param id - profile foreign key
+     * @return list of cards
+     */
+    List<Card> getAllByProfileId(int id) throws AppException;
+
 }
