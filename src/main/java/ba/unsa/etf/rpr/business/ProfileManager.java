@@ -20,18 +20,14 @@ public class ProfileManager {
      * @return true if user exists in database, false otherwise
      */
     public boolean validateLogin(String email, String password){
-        List<Profile> profiles;
+        Profile profile;
         try{
-            profiles = DaoFactory.profilesDao().findProfileByEmail(email);
+            profile = DaoFactory.profilesDao().findProfileByEmail(email);
         }
         catch(AppException e){
             e.printStackTrace();
             return false;
         }
-        if(profiles.isEmpty()){
-            return false;
-        }
-        Profile profile = profiles.get(0);
         return profile.getPassword().equals(password);
     }
 
@@ -53,7 +49,7 @@ public class ProfileManager {
      */
     public String getUserName(String email) throws AppException {
         try {
-            Profile user = DaoFactory.profilesDao().findProfileByEmail(email).get(0);
+            Profile user = DaoFactory.profilesDao().findProfileByEmail(email);
             return user.getName();
         }
         catch (AppException e){
@@ -70,7 +66,7 @@ public class ProfileManager {
      */
     public Profile getProfileByEmail(String email) throws AppException {
         try {
-            return DaoFactory.profilesDao().findProfileByEmail(email).get(0);
+            return DaoFactory.profilesDao().findProfileByEmail(email);
         }
         catch(AppException e){
             e.printStackTrace();

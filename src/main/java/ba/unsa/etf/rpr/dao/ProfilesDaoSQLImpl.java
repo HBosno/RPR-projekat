@@ -80,13 +80,7 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
      * @return list of requested records, size is 0 or 1
      */
     @Override
-    public List<Profile> findProfileByEmail(String email) throws AppException {
-        try{
-            return executeQuery("SELECT * FROM profiles WHERE email = ?", new Object[]{email});
-        }
-        catch (AppException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public Profile findProfileByEmail(String email) throws AppException {
+        return executeQueryUnique("SELECT * FROM profiles WHERE email = ?", new Object[]{email});
     }
 }

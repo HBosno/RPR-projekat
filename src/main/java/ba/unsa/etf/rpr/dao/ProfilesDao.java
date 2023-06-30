@@ -17,5 +17,5 @@ public interface ProfilesDao extends Dao<Profile> {
      * @param email - email attribute of profile bean
      * @return list of requested records, size is 0 or 1
      */
-    List<Profile> findProfileByEmail(String email) throws AppException;
+    Profile findProfileByEmail(String email) throws AppException;
 }
