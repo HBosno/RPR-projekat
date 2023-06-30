@@ -57,6 +57,9 @@ public class DashboardController {
         currentStage.close();
     }
 
+    /**
+     * On click listener method for edit profile button. Redirects user to edit profile screen.
+     */
     public void editProfileButtonOnClick(ActionEvent actionEvent) throws IOException, AppException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
@@ -70,6 +73,9 @@ public class DashboardController {
         currentStage.close();
     }
 
+    /**
+     * On click listener method for smart card button. Redirects user to smart card overview screen.
+     */
     public void smartCardButtonOnClick(ActionEvent actionEvent) throws AppException, IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cards.fxml"));
