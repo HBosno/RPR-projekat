@@ -1,11 +1,16 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.ProfileManager;
+import ba.unsa.etf.rpr.domain.Profile;
+import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class CardsController {
+
+    private final ProfileManager profileManager = new ProfileManager();
     public ListView cardsList;
     public Label serialNumberField;
     public Label cardTypeField;
@@ -15,6 +20,11 @@ public class CardsController {
     public Button activateCouponButton;
     public Button addCardButton;
     public Button backButton;
+    private Profile user;
+
+    public CardsController(String email) throws AppException {
+       user = profileManager.getProfileByEmail(email);
+    }
 
     public void depositButtonOnClick(ActionEvent actionEvent) {
     }

@@ -71,6 +71,7 @@ public class DashboardController {
     }
 
     public void smartCardButtonOnClick(ActionEvent actionEvent) {
+
     }
 
     public void routesButtonOnClick(ActionEvent actionEvent) {
