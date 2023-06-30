@@ -80,7 +80,7 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
     @Override
     public Card searchBySerialNumber(String serialno) throws AppException{
         try{
-            return executeQuery("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno}).get(0);
+            return executeQueryUnique("SELECT * FROM cards WHERE serial_number = ?", new Object[]{serialno});
         }
         catch(AppException e){
             e.printStackTrace();
