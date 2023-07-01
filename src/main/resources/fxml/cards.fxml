@@ -42,7 +42,10 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Serijski broj:" />
+                  <Label text="Serijski broj:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Label fx:id="serialNumberField">
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -55,7 +58,10 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Vrsta kartice:" />
+                  <Label text="Vrsta kartice:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Label fx:id="cardTypeField">
                      <HBox.margin>
                         <Insets left="35.0" />
@@ -68,7 +74,10 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Mjesečni kupon:" />
+                  <Label text="Mjesečni kupon:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Label fx:id="couponField">
                      <HBox.margin>
                         <Insets left="17.0" />
@@ -81,7 +90,10 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Stanje:" />
+                  <Label text="Stanje:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Label fx:id="balanceField">
                      <HBox.margin>
                         <Insets left="68.0" />
@@ -118,14 +130,23 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="addCardButton" minHeight="35.0" mnemonicParsing="false" onAction="#addCardButtonOnClick" text="Dodaj karticu">
-               <VBox.margin>
-                  <Insets left="5.0" top="10.0" />
-               </VBox.margin>
-            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="addCardButton" minHeight="35.0" mnemonicParsing="false" onAction="#addCardButtonOnClick" text="Dodaj karticu">
+                     <HBox.margin>
+                        <Insets left="5.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="removeCardButton" minHeight="35.0" mnemonicParsing="false" onAction="#removeCardButtonOnClick" text="Ukloni karticu">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
             <Button fx:id="backButton" minHeight="40.0" mnemonicParsing="false" onAction="#backButtonOnClick" text="Nazad">
                <VBox.margin>
-                  <Insets left="5.0" top="10.0" />
+                  <Insets left="5.0" top="-45.0" />
                </VBox.margin>
             </Button>
          </children>

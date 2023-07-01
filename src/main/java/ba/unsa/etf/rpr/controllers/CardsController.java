@@ -28,6 +28,7 @@ public class CardsController {
     public Button activateCouponButton;
     public Button addCardButton;
     public Button backButton;
+    public Button removeCardButton;
     private Profile user;
 
     /**
@@ -98,5 +99,8 @@ public class CardsController {
     }
 
     public void backButtonOnClick(ActionEvent actionEvent) {
+    }
+
+    public void removeCardButtonOnClick(ActionEvent actionEvent) {
     }
 }
