@@ -73,6 +73,11 @@ public class CardsController {
         });
     }
 
+    /**
+     * Utility function for determining display name for category label.
+     * @param category - enum to string value from db
+     * @return display name string
+     */
     private String determineCategory(String category){
         switch(category){
             case "STUDENT":
@@ -101,6 +106,9 @@ public class CardsController {
     public void backButtonOnClick(ActionEvent actionEvent) {
     }
 
+    /**
+     * On click listener method for remove button. Removes currently selected card both from listview and from database.
+     */
     public void removeCardButtonOnClick(ActionEvent actionEvent) throws AppException {
         String selectedItem = cardsList.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
