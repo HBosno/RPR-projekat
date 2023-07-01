@@ -3,17 +3,17 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.CardManager;
 import ba.unsa.etf.rpr.business.ProfileManager;
 import ba.unsa.etf.rpr.domain.Card;
+import ba.unsa.etf.rpr.domain.CardType;
 import ba.unsa.etf.rpr.domain.Profile;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CardsController {
 
@@ -97,7 +97,57 @@ public class CardsController {
     public void depositButtonOnClick(ActionEvent actionEvent) {
     }
 
-    public void activateCouponButtonOnClick(ActionEvent actionEvent) {
+    public void activateCouponButtonOnClick(ActionEvent actionEvent) throws AppException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Aktiviranje mjesečnog kupona");
+        alert.setHeaderText("Mjesečni kupon");
+        alert.setContentText("Želite li aktivirati mjesečni kupon? Iznos će biti preuzet sa trenutnog stanja SMART kartice.\n" +
+                "Studenti: 20 KM\nSrednja škola: 16 KM\n Osnovna škola: 16KM\n Radnička: 25 KM\n Penzionerska: 20 KM\nOstali: 23 KM);");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            String selectedItem = cardsList.getSelectionModel().getSelectedItem();
+            Card selectedCard = cardManager.getCard(Integer.parseInt(selectedItem));
+            if(balanceNegative(selectedCard.getCardType())){
+                Alert alert1 = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška");
+                alert.setHeaderText("Neuspješna aktivacija");
+                alert.setContentText("Nedovoljan iznos na kartici!");
+                alert.showAndWait();
+            }
+            else{
+                selectedCard.setBalance(newBalance(selectedCard.getCardType(), selectedCard.getBalance()));
+                cardManager.updateCard(selectedCard);
+                balanceField.setText(String.valueOf(selectedCard.getBalance()));
+            }
+        }
+    }
+
+    private boolean balanceNegative(CardType type){
+        switch(type){
+            case STUDENT:
+            case PENSIONER:
+                return (Double.parseDouble(balanceField.getText()) - 20) < 0;
+            case HIGH_SCHOOL:
+            case ELEMENTARY:
+                return (Double.parseDouble(balanceField.getText()) - 16) < 0;
+            case WORKER:
+                return (Double.parseDouble(balanceField.getText()) - 25) < 0;
+        }
+        return (Double.parseDouble(balanceField.getText()) - 23) < 0;
+    }
+
+    private double newBalance(CardType type, double balance){
+        switch(type){
+            case STUDENT:
+            case PENSIONER:
+                return balance - 20;
+            case HIGH_SCHOOL:
+            case ELEMENTARY:
+                return balance - 16;
+            case WORKER:
+                return balance - 25;
+        }
+        return balance - 23;
     }
 
     public void addCardButtonOnClick(ActionEvent actionEvent) {

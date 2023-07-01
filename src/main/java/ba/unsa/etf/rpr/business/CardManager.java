@@ -37,4 +37,12 @@ public class CardManager {
     public void deleteCard(int id) throws AppException {
         DaoFactory.cardsDao().delete(id);
     }
+
+    /**
+     * Update card with specified id.
+     * @param card = card bean to be updated
+     */
+    public void updateCard(Card card) throws AppException {
+        DaoFactory.cardsDao().update(card);
+    }
 }
