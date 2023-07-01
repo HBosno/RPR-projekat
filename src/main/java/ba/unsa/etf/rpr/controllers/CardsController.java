@@ -66,7 +66,38 @@ public class CardsController {
     public void cardsViewOnItemClicked(MouseEvent mouseEvent) {
         cardsList.setOnMouseClicked(e -> {
             String selectedItem = cardsList.getSelectionModel().getSelectedItem();
-
+            try {
+                Card card = cardManager.getCard(Integer.parseInt(selectedItem));
+                serialNumberField.setText(selectedItem);
+                String kategorija = card.getCardType().toString();
+                switch(kategorija){
+                    case "STUDENT":
+                        kategorija = "Student";
+                        break;
+                    case "HIGH SCHOOL":
+                        kategorija = "Srednja škola";
+                        break;
+                    case "ELEMENTARY":
+                        kategorija = "Osnovna škola";
+                        break;
+                    case "WORKER":
+                        kategorija = "Radnička";
+                        break;
+                    case "PENSIONER":
+                        kategorija = "Penzionerska";
+                        break;
+                    case "OTHER":
+                        kategorija = "Ostali";
+                }
+                cardTypeField.setText(kategorija);
+                if(card.isMonthlyCoupon())
+                    couponField.setText("Aktiviran");
+                else
+                    couponField.setText("Neaktiviran");
+                balanceField.setText(String.valueOf(card.getBalance()));
+            } catch (AppException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 }
