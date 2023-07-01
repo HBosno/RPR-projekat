@@ -116,8 +116,11 @@ public class CardsController {
             }
             else{
                 selectedCard.setBalance(newBalance(selectedCard.getCardType(), selectedCard.getBalance()));
+                selectedCard.setMonthlyCoupon(true);
+                couponField.setText("Aktiviran");
+                activateCouponButton.setDisable(true);
                 cardManager.updateCard(selectedCard);
-                balanceField.setText(String.valueOf(selectedCard.getBalance()));
+                balanceField.setText(selectedCard.getBalance() + " KM");
             }
         }
     }
