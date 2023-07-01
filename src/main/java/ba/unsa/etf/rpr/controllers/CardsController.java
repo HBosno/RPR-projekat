@@ -102,12 +102,12 @@ public class CardsController {
         alert.setTitle("Aktiviranje mjesečnog kupona");
         alert.setHeaderText("Mjesečni kupon");
         alert.setContentText("Želite li aktivirati mjesečni kupon? Iznos će biti preuzet sa trenutnog stanja SMART kartice.\n" +
-                "Studenti: 20 KM\nSrednja škola: 16 KM\n Osnovna škola: 16KM\n Radnička: 25 KM\n Penzionerska: 20 KM\nOstali: 23 KM);");
+                "Studenti: 20 KM\nSrednja škola: 16 KM\nOsnovna škola: 16KM\nRadnička: 25 KM\nPenzionerska: 20 KM\nOstali: 23 KM");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             String selectedItem = cardsList.getSelectionModel().getSelectedItem();
             Card selectedCard = cardManager.getCard(Integer.parseInt(selectedItem));
-            if(balanceNegative(selectedCard.getCardType())){
+            if(balanceNegative(selectedCard.getCardType(), selectedCard.getBalance())){
                 Alert alert1 = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Greška");
                 alert.setHeaderText("Neuspješna aktivacija");
@@ -122,18 +122,18 @@ public class CardsController {
         }
     }
 
-    private boolean balanceNegative(CardType type){
+    private boolean balanceNegative(CardType type, double balance){
         switch(type){
             case STUDENT:
             case PENSIONER:
-                return (Double.parseDouble(balanceField.getText()) - 20) < 0;
+                return (balance - 20) < 0;
             case HIGH_SCHOOL:
             case ELEMENTARY:
-                return (Double.parseDouble(balanceField.getText()) - 16) < 0;
+                return (balance - 16) < 0;
             case WORKER:
-                return (Double.parseDouble(balanceField.getText()) - 25) < 0;
+                return (balance - 25) < 0;
         }
-        return (Double.parseDouble(balanceField.getText()) - 23) < 0;
+        return (balance - 23) < 0;
     }
 
     private double newBalance(CardType type, double balance){
