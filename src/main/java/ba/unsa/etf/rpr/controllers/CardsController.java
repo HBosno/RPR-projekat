@@ -9,7 +9,9 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,16 +105,20 @@ public class CardsController {
         alert.setHeaderText("Mjesečni kupon");
         alert.setContentText("Želite li aktivirati mjesečni kupon? Iznos će biti preuzet sa trenutnog stanja SMART kartice.\n" +
                 "Studenti: 20 KM\nSrednja škola: 16 KM\nOsnovna škola: 16KM\nRadnička: 25 KM\nPenzionerska: 20 KM\nOstali: 23 KM");
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("img/icon.png"));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             String selectedItem = cardsList.getSelectionModel().getSelectedItem();
             Card selectedCard = cardManager.getCard(Integer.parseInt(selectedItem));
             if(balanceNegative(selectedCard.getCardType(), selectedCard.getBalance())){
                 Alert alert1 = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Greška");
-                alert.setHeaderText("Neuspješna aktivacija");
-                alert.setContentText("Nedovoljan iznos na kartici!");
-                alert.showAndWait();
+                alert1.setTitle("Greška");
+                alert1.setHeaderText("Greška pri aktivaciji");
+                alert1.setContentText("Nedovoljan iznos na kartici!");
+                stage = (Stage) alert1.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(new Image("img/icon.png"));
+                alert1.showAndWait();
             }
             else{
                 selectedCard.setBalance(newBalance(selectedCard.getCardType(), selectedCard.getBalance()));
@@ -121,6 +127,13 @@ public class CardsController {
                 activateCouponButton.setDisable(true);
                 cardManager.updateCard(selectedCard);
                 balanceField.setText(selectedCard.getBalance() + " KM");
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Uspješna aktivacija");
+                alert2.setHeaderText(null);
+                alert2.setContentText("Uspješno ste aktivirali mjesečni kupon!");
+                stage = (Stage) alert2.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(new Image("img/icon.png"));
+                alert2.showAndWait();
             }
         }
     }
