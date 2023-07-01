@@ -55,27 +55,7 @@ public class CardsController {
                 try {
                     Card card = cardManager.getCard(Integer.parseInt(newValue));
                     serialNumberField.setText(newValue);
-                    String kategorija = card.getCardType().toString();
-                    switch(kategorija){
-                        case "STUDENT":
-                            kategorija = "Student";
-                            break;
-                        case "HIGH SCHOOL":
-                            kategorija = "Srednja škola";
-                            break;
-                        case "ELEMENTARY":
-                            kategorija = "Osnovna škola";
-                            break;
-                        case "WORKER":
-                            kategorija = "Radnička";
-                            break;
-                        case "PENSIONER":
-                            kategorija = "Penzionerska";
-                            break;
-                        case "OTHER":
-                            kategorija = "Ostali";
-                    }
-                    cardTypeField.setText(kategorija);
+                    cardTypeField.setText(determineCategory(card.getCardType().toString()));
                     if(card.isMonthlyCoupon())
                         couponField.setText("Aktiviran");
                     else
@@ -86,6 +66,22 @@ public class CardsController {
                 }
             }
         });
+    }
+
+    private String determineCategory(String category){
+        switch(category){
+            case "STUDENT":
+                return "Studentska";
+            case "HIGH SCHOOL":
+                return "Srednja škola";
+            case "ELEMENTARY":
+                return "Osnovna škola";
+            case "WORKER":
+                return "Radnička";
+            case "PENSIONER":
+                return "Penzionerska";
+        }
+        return "Ostali";
     }
 
     public void depositButtonOnClick(ActionEvent actionEvent) {
