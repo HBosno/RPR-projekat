@@ -56,11 +56,15 @@ public class CardsController {
                     Card card = cardManager.getCard(Integer.parseInt(newValue));
                     serialNumberField.setText(newValue);
                     cardTypeField.setText(determineCategory(card.getCardType().toString()));
-                    if(card.isMonthlyCoupon())
+                    if(card.isMonthlyCoupon()) {
                         couponField.setText("Aktiviran");
-                    else
+                        activateCouponButton.setDisable(false);
+                    }
+                    else {
                         couponField.setText("Neaktiviran");
-                    balanceField.setText(String.valueOf(card.getBalance()));
+                        activateCouponButton.setDisable(false);
+                    }
+                    balanceField.setText(String.valueOf(card.getBalance()) + " KM");
                 } catch (AppException ex) {
                     ex.printStackTrace();
                 }

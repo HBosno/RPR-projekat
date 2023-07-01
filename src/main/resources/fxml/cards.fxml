@@ -43,7 +43,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Serijski broj:" />
-                  <Label fx:id="serialNumberField" text="Label">
+                  <Label fx:id="serialNumberField">
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
@@ -56,7 +56,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Vrsta kartice:" />
-                  <Label fx:id="cardTypeField" text="Label">
+                  <Label fx:id="cardTypeField">
                      <HBox.margin>
                         <Insets left="35.0" />
                      </HBox.margin>
@@ -69,7 +69,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Mjesečni kupon:" />
-                  <Label fx:id="couponField" text="Label">
+                  <Label fx:id="couponField">
                      <HBox.margin>
                         <Insets left="17.0" />
                      </HBox.margin>
@@ -82,7 +82,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Stanje:" />
-                  <Label fx:id="balanceField" text="Label">
+                  <Label fx:id="balanceField">
                      <HBox.margin>
                         <Insets left="68.0" />
                      </HBox.margin>
@@ -109,7 +109,7 @@
                   <Insets left="70.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="activateCouponButton" minHeight="35.0" mnemonicParsing="false" onAction="#activateCouponButtonOnClick" text="Aktiviraj mjesečni kupon">
+            <Button fx:id="activateCouponButton" disable="true" minHeight="35.0" mnemonicParsing="false" onAction="#activateCouponButtonOnClick" text="Aktiviraj mjesečni kupon">
                <VBox.margin>
                   <Insets left="40.0" top="10.0" />
                </VBox.margin>
