@@ -58,7 +58,7 @@ public class CardsController {
                     cardTypeField.setText(determineCategory(card.getCardType().toString()));
                     if(card.isMonthlyCoupon()) {
                         couponField.setText("Aktiviran");
-                        activateCouponButton.setDisable(false);
+                        activateCouponButton.setDisable(true);
                     }
                     else {
                         couponField.setText("Neaktiviran");
