@@ -39,7 +39,8 @@ public class CardsController {
     }
 
     /**
-     * Initialize method used for populating listview with user's cards' serial numbers.
+     * Initialize method used for populating listview with user's cards' serial numbers, as well as implementing the listview's listener
+       for populating each card's information labels.
      */
     @FXML
     public void initialize() throws AppException {
