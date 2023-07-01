@@ -117,7 +117,8 @@ public class CardsController {
             cardTypeField.setText("");
             couponField.setText("");
             balanceField.setText("");
-            cardManager.deleteCard(cardManager.getCard(Integer.parseInt(selectedItem)).getId());
+            Card selectedCard = cardManager.getCard(Integer.parseInt(selectedItem));
+            cardManager.deleteCard(selectedCard.getId());
         }
     }
 }
