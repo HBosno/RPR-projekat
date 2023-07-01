@@ -33,7 +33,7 @@
             <Insets top="-13.0" />
          </GridPane.margin>
       </ImageView>
-      <ListView fx:id="cardsList" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+      <ListView fx:id="cardsList" onMouseClicked="#cardsViewOnItemClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>

@@ -20,4 +20,13 @@ public class CardManager {
     public List<Card> getUserCards(int id) throws AppException {
         return DaoFactory.cardsDao().getAllByProfileId(id);
     }
+
+    /**
+     * Return card with specified serial number.
+     * @param serialno - card number
+     * @return card
+     */
+    public Card getCard(int serialno) throws AppException {
+        return DaoFactory.cardsDao().searchBySerialNumber(serialno);
+    }
 }

@@ -20,7 +20,7 @@ public interface CardsDao extends Dao<Card>{
      * @return requested card
      */
 
-    Card searchBySerialNumber(String serialno) throws AppException;
+    Card searchBySerialNumber(int serialno) throws AppException;
 
     /**
      * Return all cards sharing same profile id.
