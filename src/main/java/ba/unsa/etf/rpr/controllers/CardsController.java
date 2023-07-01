@@ -99,6 +99,10 @@ public class CardsController {
     public void depositButtonOnClick(ActionEvent actionEvent) {
     }
 
+    /**
+     * On click listener for activate coupon button. Handles transaction based on card type and if sufficient value on card balance is
+       available.
+     */
     public void activateCouponButtonOnClick(ActionEvent actionEvent) throws AppException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Aktiviranje mjesečnog kupona");
@@ -138,6 +142,12 @@ public class CardsController {
         }
     }
 
+    /**
+     * Utility method for determining if user has sufficient funds for coupon activation.
+     * @param type - card type
+     * @param balance - balance on card
+     * @return true if user doesn't have sufficient funds, true otherwise
+     */
     private boolean balanceNegative(CardType type, double balance){
         switch(type){
             case STUDENT:
@@ -152,6 +162,12 @@ public class CardsController {
         return (balance - 23) < 0;
     }
 
+    /**
+     * Utility method for determining the new balance after transaction is done, based on card type.
+     * @param type - card type
+     * @param balance - balance on card
+     * @return new card balance
+     */
     private double newBalance(CardType type, double balance){
         switch(type){
             case STUDENT:
