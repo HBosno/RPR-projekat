@@ -29,4 +29,12 @@ public class CardManager {
     public Card getCard(int serialno) throws AppException {
         return DaoFactory.cardsDao().searchBySerialNumber(serialno);
     }
+
+    /**
+     * Delete card with specified id.
+     * @param id - card id
+     */
+    public void deleteCard(int id) throws AppException {
+        DaoFactory.cardsDao().delete(id);
+    }
 }

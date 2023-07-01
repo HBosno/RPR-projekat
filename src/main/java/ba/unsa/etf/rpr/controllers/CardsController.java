@@ -101,6 +101,15 @@ public class CardsController {
     public void backButtonOnClick(ActionEvent actionEvent) {
     }
 
-    public void removeCardButtonOnClick(ActionEvent actionEvent) {
+    public void removeCardButtonOnClick(ActionEvent actionEvent) throws AppException {
+        String selectedItem = cardsList.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            cardsList.getItems().remove(selectedItem);
+            serialNumberField.setText("");
+            cardTypeField.setText("");
+            couponField.setText("");
+            balanceField.setText("");
+            cardManager.deleteCard(cardManager.getCard(Integer.parseInt(selectedItem)).getId());
+        }
     }
 }
