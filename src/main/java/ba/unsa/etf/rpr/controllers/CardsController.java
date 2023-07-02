@@ -105,6 +105,8 @@ public class CardsController {
         if (result.isPresent()){
             try{
                 Double newBalance = Double.parseDouble(result.get());
+                if(newBalance < 0)
+                    throw new NumberFormatException();
                 String selectedItem = cardsList.getSelectionModel().getSelectedItem();
                 Card selectedCard = cardManager.getCard(Integer.parseInt(selectedItem));
                 selectedCard.setBalance(selectedCard.getBalance() + newBalance);
@@ -115,7 +117,7 @@ public class CardsController {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Greška");
                 alert.setHeaderText("Greška pri transakciji");
-                alert.setContentText("Unijeli ste neispravnu vrijednost. Molimo unesite numerički iznos u KM.");
+                alert.setContentText("Unijeli ste neispravnu vrijednost. Molimo unesite nenegativan numerički iznos u KM.");
                 Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
                 stage.getIcons().add(new Image("img/icon.png"));
                 alert.showAndWait();
