@@ -2,6 +2,8 @@ package ba.unsa.etf.rpr.business;
 
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.domain.RouteFavourite;
+import ba.unsa.etf.rpr.exceptions.AppException;
 
 /**
  * Business logic layer for managing favourite routes.
@@ -16,5 +18,13 @@ public class RouteFavouriteManager {
      */
     public boolean checkForRoute(int profileId, int routeId){
         return DaoFactory.routesFavouritesDao().checkForRoute(profileId, routeId);
+    }
+
+    /**
+     * Method for adding a route to favourites.
+     * @param route - route bean to be added
+     */
+    public void addFavourite(RouteFavourite route) throws AppException {
+        DaoFactory.routesFavouritesDao().add(route);
     }
 }

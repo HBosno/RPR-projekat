@@ -86,4 +86,13 @@ public class ProfileManager {
         }
     }
 
+    /**
+     * Retrieve profile by its primary key.
+     * @param id - profile id
+     * @return profile bean
+     */
+    public Profile getById(int id) throws AppException {
+        return DaoFactory.profilesDao().getById(id);
+    }
+
 }

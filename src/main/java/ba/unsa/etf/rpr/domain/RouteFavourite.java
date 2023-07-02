@@ -17,6 +17,12 @@ public class RouteFavourite implements Idable, Serializable{
 
     public RouteFavourite(){}
 
+    public RouteFavourite(int id, Profile profile, Route route) {
+        this.id = id;
+        this.profile = profile;
+        this.route = route;
+    }
+
     public int getId() {
         return id;
     }

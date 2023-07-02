@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.ProfileManager;
 import ba.unsa.etf.rpr.business.RouteFavouriteManager;
 import ba.unsa.etf.rpr.business.RouteManager;
 import ba.unsa.etf.rpr.domain.Card;
 import ba.unsa.etf.rpr.domain.Route;
+import ba.unsa.etf.rpr.domain.RouteFavourite;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import java.util.List;
 public class RoutesController {
     private final RouteManager routeManager = new RouteManager();
     private final RouteFavouriteManager routeFavouriteManager = new RouteFavouriteManager();
+    private final ProfileManager profileManager = new ProfileManager();
     public ListView<String> routesList;
     public Label relationLabel;
     public Label frequencyLabel;
@@ -114,7 +117,11 @@ public class RoutesController {
     }
 
     public void addButtonOnClick(ActionEvent actionEvent) throws AppException {
-
+        String selectedRoute = routesList.getSelectionModel().getSelectedItem();
+        RouteFavourite route = new RouteFavourite(-1, profileManager.getById(userId), routeManager.getByName(selectedRoute));
+        routeFavouriteManager.addFavourite(route);
+        addButton.setDisable(true);
+        removeButton.setDisable(false);
     }
 
     public void removeButtonOnClick(ActionEvent actionEvent) {
