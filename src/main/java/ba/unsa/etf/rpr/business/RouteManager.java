@@ -19,4 +19,13 @@ public class RouteManager {
     public List<Route> getAllRoutes() throws AppException {
         return DaoFactory.routesDao().getAll();
     }
+
+    /**
+     * Method for retrieving the route with specified name.
+     * @param name - route name
+     * @return route bean
+     */
+    public Route getByName(String name) throws AppException {
+        return DaoFactory.routesDao().searchByName(name);
+    }
 }

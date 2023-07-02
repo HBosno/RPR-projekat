@@ -65,13 +65,13 @@ public class RoutesDaoSQLImpl extends AbstractDao<Route> implements RoutesDao {
     }
 
     /**
-     * Method executin an sql query for retrieving a bus route starting at point specified by parameter
-     * @param start -  starting point of the route
+     * Method executing an sql query for retrieving a bus route with specified name.
+     * @param routeName -  name of the route
      * @return requested Route bean
      */
     @Override
-    public List<Route> searchByStartingPoint(String start) throws AppException{
-        return executeQuery("SELECT * FROM routes WHERE route LIKE concat(?, '%')", new Object[]{start});
+    public Route searchByName(String routeName) throws AppException{
+        return executeQueryUnique("SELECT * FROM routes WHERE route = ?", new Object[]{routeName});
     }
 
 }

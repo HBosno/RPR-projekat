@@ -14,11 +14,11 @@ import java.util.List;
 public interface RoutesDao extends Dao<Route> {
 
     /**
-     * Returns a list of routes starting at point sent in the parameter.
+     * Returns the route with specified route name.
      *
-     * @param start starting point of the route
-     * @return list of routes
+     * @param routeName - name of the route
+     * @return route bean
      */
-    List<Route> searchByStartingPoint(String start) throws AppException;
+    Route searchByName(String routeName) throws AppException;
 
 }
