@@ -21,6 +21,10 @@ import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * Controller for managing routes interface interactions.
+ * @author Hamza Bosno
+ */
 public class RoutesController {
     private final RouteManager routeManager = new RouteManager();
     private final RouteFavouriteManager routeFavouriteManager = new RouteFavouriteManager();
@@ -35,10 +39,19 @@ public class RoutesController {
     public Button backButton;
     private int userId;
 
+    /**
+     * Controller constructor for setting logged in user's id.
+     * @param id - user id
+     */
     public RoutesController(int id){
         userId = id;
     }
 
+    /**
+     * Initialize method that populates listview with routes from database, regulates displayed info based on radiobutton selections and
+       manages enabling of add and remove buttons accordingly. Makes sure only one radiobutton can be selected at time, and user cannot
+       deselect both radio buttons.
+     */
     @FXML
     public void initialize() throws AppException {
         List<Route> routes = routeManager.getAllRoutes();
@@ -105,6 +118,11 @@ public class RoutesController {
         });
     }
 
+    /**
+     * Private utility method for updating frequency info if weekends radio button is selected.
+     * @param frequency - old frequency
+     * @return new frequency string
+     */
     private String newFrequency(String frequency){
         switch(frequency){
             case "5 min":
@@ -123,6 +141,9 @@ public class RoutesController {
         return "";
     }
 
+    /**
+     * On click listener method for add button. Adds route to favourites.
+     */
     public void addButtonOnClick(ActionEvent actionEvent) throws AppException {
         String selectedRoute = routesList.getSelectionModel().getSelectedItem();
         RouteFavourite route = new RouteFavourite(-1, profileManager.getById(userId), routeManager.getByName(selectedRoute));
@@ -131,6 +152,9 @@ public class RoutesController {
         removeButton.setDisable(false);
     }
 
+    /**
+     * On click listener method for remove button. Removes route from favourites.
+     */
     public void removeButtonOnClick(ActionEvent actionEvent) throws AppException {
         String selectedRoute = routesList.getSelectionModel().getSelectedItem();
         RouteFavourite favouriteRoute = routeFavouriteManager.getRoute(userId, routeManager.getByName(selectedRoute).getId());
@@ -139,6 +163,9 @@ public class RoutesController {
         removeButton.setDisable(true);
     }
 
+    /**
+     * On click listener method for back button. Redirects user to dashboard.
+     */
     public void backButtonOnClick(ActionEvent actionEvent) throws AppException, IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
