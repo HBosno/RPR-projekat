@@ -48,12 +48,55 @@ public class RoutesController {
             if (newValue != null) {
                 relationLabel.setText(newValue);
                 try {
-                    frequencyLabel.setText("Frekventnost: " + routeManager.getByName(newValue).getFrequency());
+                    if(workDaysRadioButton.isSelected()) {
+                        frequencyLabel.setText("Frekventnost: " + routeManager.getByName(newValue).getFrequency());
+                    }
+                    else{
+                        frequencyLabel.setText("Frekventnost: " + newFrequency(routeManager.getByName(newValue).getFrequency()));
+                    }
                 } catch (AppException e) {
                     e.printStackTrace();
                 }
             }
         });
+        weekendRadioButton.setOnAction(event -> {
+            String selectedRoute = routesList.getSelectionModel().getSelectedItem();
+            if(selectedRoute != null){
+                try {
+                    frequencyLabel.setText("Frekventnost: " + newFrequency(routeManager.getByName(selectedRoute).getFrequency()));
+                } catch (AppException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        workDaysRadioButton.setOnAction(event -> {
+            String selectedRoute = routesList.getSelectionModel().getSelectedItem();
+            if(selectedRoute != null){
+                try {
+                    frequencyLabel.setText("Frekventnost: " + routeManager.getByName(selectedRoute).getFrequency());
+                } catch (AppException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private String newFrequency(String frequency){
+        switch(frequency){
+            case "5 min":
+                return "20 min";
+            case "15 min":
+                return "30 min";
+            case "30 min":
+                return "1 h";
+            case "45 min":
+                return "1h 30 min";
+            case "55 min":
+                return "2 h";
+            case "1 h":
+                return "1 h 30 min";
+        }
+        return "";
     }
 
     public void addButtonOnClick(ActionEvent actionEvent) {
