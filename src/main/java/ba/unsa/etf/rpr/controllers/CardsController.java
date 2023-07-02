@@ -17,6 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller for managing smart card user interface.
+ * @author Hamza Bosno
+ */
 public class CardsController {
 
     private final ProfileManager profileManager = new ProfileManager();
