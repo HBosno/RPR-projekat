@@ -112,7 +112,8 @@ public class RegistrationController {
                 alert.setTitle("Obavijest");
                 alert.setHeaderText("Uspješna registracija!");
                 alert.setContentText("Možete se sada prijaviti na vaš račun.");
-                stage.getIcons().add(new Image("img/icon.png"));
+                Stage stage1 = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage1.getIcons().add(new Image("img/icon.png"));
                 alert.showAndWait();
             }
             catch(AppException e){
