@@ -89,7 +89,17 @@ public class DashboardController {
         currentStage.close();
     }
 
-    public void routesButtonOnClick(ActionEvent actionEvent) {
+    public void routesButtonOnClick(ActionEvent actionEvent) throws AppException, IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/routes.fxml"));
+        loader.setController(new RoutesController(profileManager.getProfileByEmail(userEmail).getId()));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.show();
+        Stage currentStage = (Stage) editProfileButton.getScene().getWindow();
+        currentStage.close();
     }
 
     public void favouriteRoutesButtonOnClick(ActionEvent actionEvent) {

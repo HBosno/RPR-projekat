@@ -15,6 +15,11 @@ public class RoutesController {
     public Button addButton;
     public Button removeButton;
     public Button backButton;
+    private int userId;
+
+    public RoutesController(int id){
+        userId = id;
+    }
 
     public void addButtonOnClick(ActionEvent actionEvent) {
     }
