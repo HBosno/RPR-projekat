@@ -27,4 +27,22 @@ public class RouteFavouriteManager {
     public void addFavourite(RouteFavourite route) throws AppException {
         DaoFactory.routesFavouritesDao().add(route);
     }
+
+    /**
+     * Get favourite route by profile and route id.
+     * @param profileId - user id
+     * @param routeId - route id
+     * @return favourite route bean
+     */
+    public RouteFavourite getRoute(int profileId, int routeId) throws AppException {
+        return DaoFactory.routesFavouritesDao().getRoute(profileId, routeId);
+    }
+
+    /**
+     * Delete route with specified id from favourites.
+     * @param id - favourite route id
+     */
+    public void deleteRoute(int id) throws AppException {
+        DaoFactory.routesFavouritesDao().delete(id);
+    }
 }

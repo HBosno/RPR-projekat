@@ -17,7 +17,7 @@ import java.util.TreeMap;
 public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> implements RoutesFavouritesDao {
     private static RoutesFavouritesDaoSQLImpl instance = null;
     private RoutesFavouritesDaoSQLImpl() {
-        super("routes_favourites");
+        super("routesFavourites");
     }
 
     public static RoutesFavouritesDaoSQLImpl getInstance(){
@@ -78,5 +78,16 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
         catch(AppException e){
             return false;
         }
+    }
+
+    /**
+     * Method executing sql query for retrieving route with specified user.
+     * @param profileId - user id
+     * @param routeId - route id
+     * @return route
+     */
+    @Override
+    public RouteFavourite getRoute(int profileId, int routeId) throws AppException {
+        return executeQueryUnique("SELECT * FROM routesFavourites WHERE profile_id = ? AND route_id = ?", new Object[]{profileId, routeId});
     }
 }

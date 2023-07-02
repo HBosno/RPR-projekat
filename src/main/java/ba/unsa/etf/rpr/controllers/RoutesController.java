@@ -124,7 +124,12 @@ public class RoutesController {
         removeButton.setDisable(false);
     }
 
-    public void removeButtonOnClick(ActionEvent actionEvent) {
+    public void removeButtonOnClick(ActionEvent actionEvent) throws AppException {
+        String selectedRoute = routesList.getSelectionModel().getSelectedItem();
+        RouteFavourite favouriteRoute = routeFavouriteManager.getRoute(userId, routeManager.getByName(selectedRoute).getId());
+        routeFavouriteManager.deleteRoute(favouriteRoute.getId());
+        addButton.setDisable(false);
+        removeButton.setDisable(true);
     }
 
     public void backButtonOnClick(ActionEvent actionEvent) {
