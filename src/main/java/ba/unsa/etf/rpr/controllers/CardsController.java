@@ -260,7 +260,17 @@ public class CardsController {
         });
     }
 
-    public void backButtonOnClick(ActionEvent actionEvent) {
+    public void backButtonOnClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
+        loader.setController(new DashboardController(user.getEmail()));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.show();
+        Stage currentStage = (Stage) backButton.getScene().getWindow();
+        currentStage.close();
     }
 
     /**
