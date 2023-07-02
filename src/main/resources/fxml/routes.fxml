@@ -48,17 +48,17 @@
       </ListView>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Label fx:id="relationLabel">
+            <Label fx:id="relationLabel" text="nesto">
                <VBox.margin>
-                  <Insets left="100.0" top="-50.0" />
+                  <Insets left="75.0" top="-50.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="frequencyLabel">
+            <Label fx:id="frequencyLabel" text="nesto">
                <VBox.margin>
-                  <Insets left="100.0" top="5.0" />
+                  <Insets left="75.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -66,7 +66,7 @@
             </Label>
             <RadioButton fx:id="workDaysRadioButton" mnemonicParsing="false" text="Radni dani">
                <VBox.margin>
-                  <Insets left="100.0" top="50.0" />
+                  <Insets left="75.0" top="50.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -74,7 +74,7 @@
             </RadioButton>
             <RadioButton fx:id="weekendRadioButton" mnemonicParsing="false" text="Vikend">
                <VBox.margin>
-                  <Insets left="100.0" top="5.0" />
+                  <Insets left="75.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -98,7 +98,7 @@
       </VBox>
       <Button fx:id="backButton" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#backButtonOnClick" text="Nazad" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
-            <Insets left="100.0" />
+            <Insets left="75.0" />
          </GridPane.margin>
       </Button>
    </children>
