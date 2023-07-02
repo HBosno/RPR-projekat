@@ -58,6 +58,8 @@ public class AddCardController {
         if(validateSerialNumber(serialNumberField.getText())){
             Card card = new Card (-1, Integer.parseInt(serialNumberField.getText()), determineCategory(choiceBox.getValue()), 0, false, user);
             cardManager.addCard(card);
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.close();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

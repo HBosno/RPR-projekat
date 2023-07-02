@@ -236,7 +236,19 @@ public class CardsController {
         stage.setResizable(false);
         stage.getIcons().add(new Image("img/icon.png"));
         stage.show();
-
+        stage.setOnHiding(x->{
+            List<Card> cards = null;
+            try {
+                cards = cardManager.getUserCards(user.getId());
+            } catch (AppException e) {
+                e.printStackTrace();
+            }
+            List<String> serialNumbers = new ArrayList<>();
+            for(Card card: cards){
+                serialNumbers.add(String.valueOf(card.getSerialNumber()));
+            }
+            cardsList.getItems().addAll(serialNumbers);
+        });
     }
 
     public void backButtonOnClick(ActionEvent actionEvent) {
