@@ -127,6 +127,9 @@ public class RegistrationController {
         }
     }
 
+    /**
+     * On click listener method for back button. Redirects user to login screen.
+     */
     public void backButtonOnClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
