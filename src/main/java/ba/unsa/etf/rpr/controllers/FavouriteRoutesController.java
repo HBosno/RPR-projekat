@@ -35,6 +35,7 @@ public class FavouriteRoutesController {
     public RadioButton workDaysRadioButton;
     public RadioButton weekendRadioButton;
     public Button backButton;
+    public Button removeButton;
     private int userId;
 
     /**
@@ -47,14 +48,15 @@ public class FavouriteRoutesController {
 
     /**
      * Initialize method that populates listview with favourite routes from database and regulates displayed info based on radiobutton
-       selections. Makes sure only one radiobutton can be selected at time, and user cannot deselect both radio buttons.
+       selections. Makes sure only one radiobutton can be selected at time, and user cannot deselect both radio buttons. Handles
+       remove button enabling.
      */
     @FXML
     public void initialize() throws AppException {
         List<RouteFavourite> favouriteRoutes = routeFavouriteManager.getAllForUser(userId);
         List<Integer> routeIds = new ArrayList<>();
         for(RouteFavourite route: favouriteRoutes){
-            routeIds.add(route.getId());
+            routeIds.add(route.getRoute().getId());
         }
         List<String> routeNames = new ArrayList<>();
         for(Integer id: routeIds){
@@ -73,6 +75,7 @@ public class FavouriteRoutesController {
         routesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 relationLabel.setText(newValue);
+                removeButton.setDisable(false);
                 try {
                     if(workDaysRadioButton.isSelected()) {
                         frequencyLabel.setText("Frekventnost: " + routeManager.getByName(newValue).getFrequency());
@@ -144,5 +147,16 @@ public class FavouriteRoutesController {
         stage.show();
         Stage currentStage = (Stage) backButton.getScene().getWindow();
         currentStage.close();
+    }
+
+    /**
+     * On click listener method for remove button. Removes route from favourites.
+     */
+    public void removeButtonOnClick(ActionEvent actionEvent) throws AppException {
+        String selectedRoute = routesList.getSelectionModel().getSelectedItem();
+        RouteFavourite favouriteRoute = routeFavouriteManager.getRoute(userId, routeManager.getByName(selectedRoute).getId());
+        routeFavouriteManager.deleteRoute(favouriteRoute.getId());
+        routesList.getItems().remove(selectedRoute);
+        removeButton.setDisable(true);
     }
 }
