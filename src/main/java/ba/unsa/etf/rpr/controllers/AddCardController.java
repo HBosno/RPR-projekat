@@ -54,10 +54,14 @@ public class AddCardController {
         return input.matches(serialNoRegex);
     }
 
-    public void addButtonOnClick(ActionEvent actionEvent) throws AppException {
-        if(validateSerialNumber(serialNumberField.getText()) && cardManager.cardExists(Integer.parseInt(serialNumberField.getText()))){
+    public void addButtonOnClick(ActionEvent actionEvent){
+        if(validateSerialNumber(serialNumberField.getText()) && !cardManager.cardExists(Integer.parseInt(serialNumberField.getText()))){
             Card card = new Card (-1, Integer.parseInt(serialNumberField.getText()), determineCategory(choiceBox.getValue()), 0, false, user);
-            cardManager.addCard(card);
+            try {
+                cardManager.addCard(card);
+            } catch (AppException e) {
+                e.printStackTrace();
+            }
             Stage stage = (Stage) addButton.getScene().getWindow();
             stage.close();
         }
@@ -77,7 +81,7 @@ public class AddCardController {
             case "Studentska":
                 return CardType.valueOf("STUDENT");
             case "Srednja škola":
-                return CardType.valueOf("HIGH SCHOOL");
+                return CardType.valueOf("HIGH_SCHOOL");
             case "Osnovna škola":
                 return CardType.valueOf("ELEMENTARY");
             case "Radnička":

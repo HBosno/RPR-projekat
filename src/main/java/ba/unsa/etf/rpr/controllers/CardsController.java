@@ -93,7 +93,7 @@ public class CardsController {
         switch(category){
             case "STUDENT":
                 return "Studentska";
-            case "HIGH SCHOOL":
+            case "HIGH_SCHOOL":
                 return "Srednja škola";
             case "ELEMENTARY":
                 return "Osnovna škola";
