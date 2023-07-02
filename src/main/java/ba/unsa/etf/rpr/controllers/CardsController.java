@@ -96,11 +96,17 @@ public class CardsController {
         return "Ostali";
     }
 
+    /**
+     * On click listener method for deposit button. Allow user to enter a non negative value to update card balance. On faulty input,
+       alert dialog window is shown.
+     */
     public void depositButtonOnClick(ActionEvent actionEvent) {
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Dopuni karticu");
         dialog.setHeaderText("Plaćanje kreditnom karticom");
         dialog.setContentText("Unesite iznos u KM za dopunu:");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("img/icon.png"));
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             try{
@@ -118,7 +124,7 @@ public class CardsController {
                 alert.setTitle("Greška");
                 alert.setHeaderText("Greška pri transakciji");
                 alert.setContentText("Unijeli ste neispravnu vrijednost. Molimo unesite nenegativan numerički iznos u KM.");
-                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage = (Stage) alert.getDialogPane().getScene().getWindow();
                 stage.getIcons().add(new Image("img/icon.png"));
                 alert.showAndWait();
             } catch (AppException e) {
