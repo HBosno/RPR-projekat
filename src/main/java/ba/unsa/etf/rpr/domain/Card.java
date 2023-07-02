@@ -20,6 +20,15 @@ public class Card implements Idable, Serializable{
 
     public Card(){}
 
+    public Card(int id, int serialNumber, CardType cardType, double balance, boolean monthlyCoupon, Profile profile) {
+        this.id = id;
+        this.serialNumber = serialNumber;
+        this.cardType = cardType;
+        this.balance = balance;
+        this.monthlyCoupon = monthlyCoupon;
+        this.profile = profile;
+    }
+
     public int getId() {
         return id;
     }

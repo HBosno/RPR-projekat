@@ -45,4 +45,12 @@ public class CardManager {
     public void updateCard(Card card) throws AppException {
         DaoFactory.cardsDao().update(card);
     }
+
+    /**
+     * Add provided card to database.
+     * @param card - provided card bean
+     */
+    public void addCard(Card card) throws AppException {
+        DaoFactory.cardsDao().add(card);
+    }
 }

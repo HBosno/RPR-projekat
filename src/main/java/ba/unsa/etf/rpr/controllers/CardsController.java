@@ -228,7 +228,7 @@ public class CardsController {
     public void addCardButtonOnClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addCard.fxml"));
-        loader.setController(new AddCardController(user.getId()));
+        loader.setController(new AddCardController(user));
         stage.setTitle("JavniPrevozKS");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setWidth(500);
