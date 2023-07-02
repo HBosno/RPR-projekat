@@ -30,6 +30,7 @@ public class RegistrationController {
     public PasswordField passwordField;
     public Label passwordWarning;
     public Button registerButton;
+    public Button backButton;
 
     /**
      * Implements on-screen validation for email and password fields via listeners and regex methods.
@@ -124,5 +125,17 @@ public class RegistrationController {
                 alert.showAndWait();
             }
         }
+    }
+
+    public void backButtonOnClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.setResizable(false);
+        stage.show();
+        Stage currentStage = (Stage) backButton.getScene().getWindow();
+        currentStage.close();
     }
 }

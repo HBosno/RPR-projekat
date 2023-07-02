@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <ImageView fitHeight="151.0" fitWidth="605.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/img1.png" />
          </image>
+         <GridPane.margin>
+            <Insets top="20.0" />
+         </GridPane.margin>
       </ImageView>
       <VBox prefHeight="80.0" prefWidth="600.0" GridPane.rowIndex="1">
          <children>
@@ -29,7 +41,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets left="220.0" top="5.0" />
+                  <Insets left="220.0" top="50.0" />
                </VBox.margin>
             </Label>
             <TextField fx:id="emailField" prefHeight="26.0" prefWidth="361.0" promptText="Email adresa *">
@@ -46,14 +58,14 @@
       </VBox>
       <HBox prefHeight="73.0" prefWidth="590.0" GridPane.rowIndex="2">
          <children>
-            <TextField fx:id="nameField" prefHeight="26.0" prefWidth="136.0" promptText="Ime *">
+            <TextField fx:id="nameField" minWidth="250.0" prefHeight="26.0" prefWidth="136.0" promptText="Ime *">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="40.0" />
                </HBox.margin>
             </TextField>
-            <TextField fx:id="surnameField" promptText="Prezime *">
+            <TextField fx:id="surnameField" maxWidth="500.0" minWidth="246.0" promptText="Prezime *">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="40.0" />
                </HBox.margin>
             </TextField>
          </children>
@@ -68,23 +80,32 @@
          <children>
             <PasswordField fx:id="passwordField" promptText="Password *">
                <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="50.0" top="20.0" />
+                  <Insets bottom="20.0" left="20.0" right="50.0" top="30.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="registerButton" minHeight="35.0" mnemonicParsing="false" onAction="#registerButtonOnClick" prefHeight="22.0" prefWidth="78.0" text="Registruj se">
-               <VBox.margin>
-                  <Insets left="460.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets top="-5.0" />
-               </padding>
-            </Button>
-            <Label fx:id="passwordWarning" alignment="TOP_LEFT" minHeight="50.0" minWidth="314.0" prefHeight="18.0" prefWidth="0.0" textFill="RED">
-               <VBox.margin>
-                  <Insets left="22.0" top="-40.0" />
-               </VBox.margin>
-            </Label>
          </children>
       </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+         <children>
+            <Label fx:id="passwordWarning" alignment="TOP_LEFT" minHeight="50.0" minWidth="314.0" prefHeight="18.0" prefWidth="0.0" textFill="RED">
+               <HBox.margin>
+                  <Insets left="20.0" top="-40.0" />
+               </HBox.margin>
+            </Label>
+            <Button fx:id="registerButton" minHeight="35.0" mnemonicParsing="false" onAction="#registerButtonOnClick" prefHeight="22.0" prefWidth="78.0" text="Registruj se">
+               <HBox.margin>
+                  <Insets left="20.0" top="-15.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="backButton" minHeight="35.0" mnemonicParsing="false" onAction="#backButtonOnClick" prefHeight="22.0" prefWidth="78.0" text="Nazad">
+               <HBox.margin>
+                  <Insets left="25.0" top="-15.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <GridPane.margin>
+            <Insets top="20.0" />
+         </GridPane.margin>
+      </HBox>
    </children>
 </GridPane>
