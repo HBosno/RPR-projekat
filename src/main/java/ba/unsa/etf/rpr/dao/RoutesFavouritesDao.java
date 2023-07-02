@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.RouteFavourite;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
+import java.util.List;
+
 /**
  * Dao interface for RoutesFavourites domain bean
  *
@@ -25,4 +27,11 @@ public interface RoutesFavouritesDao extends Dao<RouteFavourite>{
      * @return route
      */
     RouteFavourite getRoute(int profileId, int routeId) throws AppException;
+
+    /**
+     * Retrieves all favourite routes for specified user.
+     * @param userId - user id
+     * @return - list of routes
+     */
+    List<RouteFavourite> getAllForUser(int userId) throws AppException;
 }

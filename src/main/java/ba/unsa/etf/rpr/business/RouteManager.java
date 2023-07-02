@@ -28,4 +28,13 @@ public class RouteManager {
     public Route getByName(String name) throws AppException {
         return DaoFactory.routesDao().searchByName(name);
     }
+
+    /**
+     * Get route with specified id.
+     * @param id - primary key of route
+     * @return route
+     */
+    public Route getById(int id) throws AppException {
+        return DaoFactory.routesDao().getById(id);
+    }
 }

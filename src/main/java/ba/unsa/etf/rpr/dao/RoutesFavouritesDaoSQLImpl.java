@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -89,5 +90,15 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
     @Override
     public RouteFavourite getRoute(int profileId, int routeId) throws AppException {
         return executeQueryUnique("SELECT * FROM routesFavourites WHERE profile_id = ? AND route_id = ?", new Object[]{profileId, routeId});
+    }
+
+    /**
+     * Method executing sql query for retrieving all favourite routes for specified user.
+     * @param userId - user id
+     * @return list of routes
+     */
+    @Override
+    public List<RouteFavourite> getAllForUser(int userId) throws AppException {
+        return executeQuery("SELECT * FROM routesFavourites WHERE profile_id = ?", new Object[]{userId});
     }
 }

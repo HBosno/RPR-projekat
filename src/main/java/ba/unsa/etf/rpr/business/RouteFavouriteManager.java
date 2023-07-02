@@ -5,6 +5,8 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.RouteFavourite;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
+import java.util.List;
+
 /**
  * Business logic layer for managing favourite routes.
  * @author Hamza Bosno
@@ -44,5 +46,14 @@ public class RouteFavouriteManager {
      */
     public void deleteRoute(int id) throws AppException {
         DaoFactory.routesFavouritesDao().delete(id);
+    }
+
+    /**
+     * Get a list of all routes for specified user.
+     * @param userId - user id
+     * @return - list of routes
+     */
+    public List<RouteFavourite> getAllForUser(int userId) throws AppException {
+        return DaoFactory.routesFavouritesDao().getAllForUser(userId);
     }
 }
