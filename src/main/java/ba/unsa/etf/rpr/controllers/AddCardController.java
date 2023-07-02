@@ -28,6 +28,11 @@ public class AddCardController {
         choiceBox.getItems().addAll("Studentska", "Srednja škola", "Osnovna škola", "Radnička", "Penzionerska", "Ostali");
     }
 
+    private boolean validateSerialNumber(String input){
+        String serialNoRegex = "\\d{9}";
+        return input.matches(serialNoRegex);
+    }
+
     public void addButtonOnClick(ActionEvent actionEvent) {
     }
 

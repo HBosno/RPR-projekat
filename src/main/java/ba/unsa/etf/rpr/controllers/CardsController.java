@@ -8,14 +8,19 @@ import ba.unsa.etf.rpr.domain.Profile;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
  * Controller for managing smart card user interface.
@@ -220,7 +225,18 @@ public class CardsController {
         return balance - 23;
     }
 
-    public void addCardButtonOnClick(ActionEvent actionEvent) {
+    public void addCardButtonOnClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addCard.fxml"));
+        loader.setController(new AddCardController(user.getId()));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setWidth(500);
+        stage.setHeight(400);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.show();
+
     }
 
     public void backButtonOnClick(ActionEvent actionEvent) {
