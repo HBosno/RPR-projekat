@@ -63,4 +63,20 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
         return map;
     }
 
+    /**
+     * Method executing sql query for checking if a certain route has been added to favourites by specified user.
+     * @param profileId - user id
+     * @param routeId - route id
+     * @return true if route is in favourites, false otherwise
+     */
+    @Override
+    public boolean checkForRoute(int profileId, int routeId){
+        try{
+            executeQueryUnique("SELECT * FROM routesFavourites WHERE profile_id = ? AND route_id = ?", new Object[]{profileId, routeId});
+            return true;
+        }
+        catch(AppException e){
+            return false;
+        }
+    }
 }

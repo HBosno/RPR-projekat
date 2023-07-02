@@ -100,6 +100,7 @@ public class RoutesController {
     }
 
     public void addButtonOnClick(ActionEvent actionEvent) {
+
     }
 
     public void removeButtonOnClick(ActionEvent actionEvent) {
