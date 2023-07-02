@@ -52,7 +52,7 @@ public class CardsController {
 
     /**
      * Initialize method used for populating listview with user's cards' serial numbers, as well as implementing the listview's listener
-       for populating each card's information labels.
+       for populating each card's information labels. Also manages enabling and disabling of certain buttons.
      */
     @FXML
     public void initialize() throws AppException {
@@ -65,6 +65,9 @@ public class CardsController {
         cardsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 try {
+                    removeCardButton.setDisable(false);
+                    activateCouponButton.setDisable(false);
+                    depositButton.setDisable(false);
                     Card card = cardManager.getCard(Integer.parseInt(newValue));
                     serialNumberField.setText(newValue);
                     cardTypeField.setText(determineCategory(card.getCardType().toString()));
@@ -80,6 +83,11 @@ public class CardsController {
                 } catch (AppException ex) {
                     ex.printStackTrace();
                 }
+            }
+            else{
+                removeCardButton.setDisable(true);
+                activateCouponButton.setDisable(true);
+                depositButton.setDisable(true);
             }
         });
     }
@@ -247,6 +255,7 @@ public class CardsController {
             for(Card card: cards){
                 serialNumbers.add(String.valueOf(card.getSerialNumber()));
             }
+            cardsList.getItems().clear();
             cardsList.getItems().addAll(serialNumbers);
         });
     }

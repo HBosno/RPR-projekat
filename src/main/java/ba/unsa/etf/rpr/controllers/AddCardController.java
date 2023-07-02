@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 public class AddCardController {
 
     private final CardManager cardManager = new CardManager();
-    private final ProfileManager profileManager = new ProfileManager();
     public TextField serialNumberField;
     public ChoiceBox<String> choiceBox;
     public Button addButton;
@@ -93,5 +92,7 @@ public class AddCardController {
     }
 
     public void cancelButtonOnClick(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 }
