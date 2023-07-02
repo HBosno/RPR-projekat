@@ -97,6 +97,32 @@ public class CardsController {
     }
 
     public void depositButtonOnClick(ActionEvent actionEvent) {
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Dopuni karticu");
+        dialog.setHeaderText("Plaćanje kreditnom karticom");
+        dialog.setContentText("Unesite iznos u KM za dopunu:");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            try{
+                Double newBalance = Double.parseDouble(result.get());
+                String selectedItem = cardsList.getSelectionModel().getSelectedItem();
+                Card selectedCard = cardManager.getCard(Integer.parseInt(selectedItem));
+                selectedCard.setBalance(selectedCard.getBalance() + newBalance);
+                cardManager.updateCard(selectedCard);
+                balanceField.setText(selectedCard.getBalance() + " KM");
+            }
+            catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška");
+                alert.setHeaderText("Greška pri transakciji");
+                alert.setContentText("Unijeli ste neispravnu vrijednost. Molimo unesite numerički iznos u KM.");
+                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(new Image("img/icon.png"));
+                alert.showAndWait();
+            } catch (AppException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
