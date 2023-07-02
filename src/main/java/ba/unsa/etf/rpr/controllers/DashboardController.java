@@ -89,6 +89,9 @@ public class DashboardController {
         currentStage.close();
     }
 
+    /**
+     * On click listener method for routes button. Redirects user routes overview.
+     */
     public void routesButtonOnClick(ActionEvent actionEvent) throws AppException, IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/routes.fxml"));
@@ -102,6 +105,9 @@ public class DashboardController {
         currentStage.close();
     }
 
+    /**
+     * On click listener method for favourite routes button. Redirects favourite routes overview.
+     */
     public void favouriteRoutesButtonOnClick(ActionEvent actionEvent) throws AppException, IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/favouriteRoutes.fxml"));
