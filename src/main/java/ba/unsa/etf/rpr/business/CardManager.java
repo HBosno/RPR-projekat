@@ -53,4 +53,20 @@ public class CardManager {
     public void addCard(Card card) throws AppException {
         DaoFactory.cardsDao().add(card);
     }
+
+    /**
+     * Method used to check if a card already exists in database. Used when adding new cards to handle the case of trying to add an
+       existing card.
+     * @param serialNumber - card's serial number
+     * @return true if card is already in db, false otherwise
+     */
+    public boolean cardExists(int serialNumber){
+        try{
+            Card card = DaoFactory.cardsDao().searchBySerialNumber(serialNumber);
+            return true;
+        }
+        catch(AppException e){
+            return false;
+        }
+    }
 }

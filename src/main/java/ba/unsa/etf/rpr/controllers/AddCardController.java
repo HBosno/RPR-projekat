@@ -55,7 +55,7 @@ public class AddCardController {
     }
 
     public void addButtonOnClick(ActionEvent actionEvent) throws AppException {
-        if(validateSerialNumber(serialNumberField.getText())){
+        if(validateSerialNumber(serialNumberField.getText()) && cardManager.cardExists(Integer.parseInt(serialNumberField.getText()))){
             Card card = new Card (-1, Integer.parseInt(serialNumberField.getText()), determineCategory(choiceBox.getValue()), 0, false, user);
             cardManager.addCard(card);
             Stage stage = (Stage) addButton.getScene().getWindow();
@@ -65,7 +65,7 @@ public class AddCardController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška");
             alert.setHeaderText("Greška pri dodavanju kartice");
-            alert.setContentText("Neispravan serijski broj!");
+            alert.setContentText("Neispravan serijski broj/Kartica već dodana.");
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
             stage.getIcons().add(new Image("img/icon.png"));
             alert.showAndWait();
