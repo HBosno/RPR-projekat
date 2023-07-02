@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.ProfileManager;
 import ba.unsa.etf.rpr.business.RouteFavouriteManager;
 import ba.unsa.etf.rpr.business.RouteManager;
 import ba.unsa.etf.rpr.domain.Route;
@@ -7,10 +8,17 @@ import ba.unsa.etf.rpr.domain.RouteFavourite;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
  * Controller for managing favourite routes interface interactions.
@@ -20,6 +28,7 @@ public class FavouriteRoutesController {
 
     private final RouteFavouriteManager routeFavouriteManager = new RouteFavouriteManager();
     private final RouteManager routeManager = new RouteManager();
+    private final ProfileManager profileManager = new ProfileManager();
     public ListView<String> routesList;
     public Label relationLabel;
     public Label frequencyLabel;
@@ -121,6 +130,19 @@ public class FavouriteRoutesController {
         return "";
     }
 
-    public void backButtonOnClick(ActionEvent actionEvent) {
+    /**
+     * On click listener method for back button. Redirects user to dashboard.
+     */
+    public void backButtonOnClick(ActionEvent actionEvent) throws IOException, AppException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
+        loader.setController(new DashboardController(profileManager.getById(userId).getEmail()));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.show();
+        Stage currentStage = (Stage) backButton.getScene().getWindow();
+        currentStage.close();
     }
 }
