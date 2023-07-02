@@ -33,6 +33,10 @@ public class AddCardController {
         user = profile;
     }
 
+    /**
+     * Initialize method that populates view's choicebox and implements listeners for choicebox and serial number entry field in order
+       to manage enabling of add button.
+     */
     @FXML
     public void initialize(){
         choiceBox.getItems().addAll("Studentska", "Srednja škola", "Osnovna škola", "Radnička", "Penzionerska", "Ostali");
@@ -48,11 +52,20 @@ public class AddCardController {
         });
     }
 
+    /**
+     * Private utility method for validating serial number input with regex.
+     * @param input - entered serial number
+     * @return true if matches regex, false otherwise
+     */
     private boolean validateSerialNumber(String input){
         String serialNoRegex = "\\d{0,9}";
         return input.matches(serialNoRegex);
     }
 
+    /**
+     * On click listener method for add button. Checks if card is already in database and if serial number matches regex
+       requirements, then adds the card to database. Otherwise alerts the user.
+     */
     public void addButtonOnClick(ActionEvent actionEvent){
         if(validateSerialNumber(serialNumberField.getText()) && !cardManager.cardExists(Integer.parseInt(serialNumberField.getText()))){
             Card card = new Card (-1, Integer.parseInt(serialNumberField.getText()), determineCategory(choiceBox.getValue()), 0, false, user);
@@ -75,6 +88,11 @@ public class AddCardController {
         }
     }
 
+    /**
+     * Utility method for determining card type when creating a Card bean, based on choice from choicebox.
+     * @param category - chosen string value from choicebox
+     * @return respective CardType enum
+     */
     private CardType determineCategory(String category){
         switch(category){
             case "Studentska":
@@ -91,6 +109,9 @@ public class AddCardController {
         return CardType.valueOf("OTHER");
     }
 
+    /**
+     * On click listener method for cancel button. Simply closes add card view.
+     */
     public void cancelButtonOnClick(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
