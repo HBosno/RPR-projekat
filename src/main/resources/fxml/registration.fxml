@@ -20,10 +20,11 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <ImageView fitHeight="151.0" fitWidth="605.0" pickOnBounds="true" preserveRatio="true">
@@ -31,19 +32,11 @@
             <Image url="@../img/img1.png" />
          </image>
          <GridPane.margin>
-            <Insets top="20.0" />
+            <Insets top="30.0" />
          </GridPane.margin>
       </ImageView>
-      <VBox prefHeight="80.0" prefWidth="600.0" GridPane.rowIndex="1">
+      <VBox prefHeight="80.0" prefWidth="600.0" GridPane.rowIndex="2">
          <children>
-            <Label prefHeight="30.0" prefWidth="153.0" text="Registrujte se">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="220.0" top="50.0" />
-               </VBox.margin>
-            </Label>
             <TextField fx:id="emailField" prefHeight="26.0" prefWidth="361.0" promptText="Email adresa *">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="50.0" top="20.0" />
@@ -51,21 +44,21 @@
             </TextField>
             <Label fx:id="emailWarning" textFill="RED">
                <VBox.margin>
-                  <Insets left="22.0" top="-10.0" />
+                  <Insets left="22.0" top="-7.0" />
                </VBox.margin>
             </Label>
          </children>
       </VBox>
-      <HBox prefHeight="73.0" prefWidth="590.0" GridPane.rowIndex="2">
+      <HBox prefHeight="73.0" prefWidth="590.0" GridPane.rowIndex="3">
          <children>
             <TextField fx:id="nameField" minWidth="250.0" prefHeight="26.0" prefWidth="136.0" promptText="Ime *">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="40.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
             </TextField>
             <TextField fx:id="surnameField" maxWidth="500.0" minWidth="246.0" promptText="Prezime *">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="40.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
             </TextField>
          </children>
@@ -76,20 +69,11 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <VBox prefHeight="168.0" prefWidth="582.0" GridPane.rowIndex="3">
-         <children>
-            <PasswordField fx:id="passwordField" promptText="Password *">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="50.0" top="30.0" />
-               </VBox.margin>
-            </PasswordField>
-         </children>
-      </VBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
          <children>
             <Label fx:id="passwordWarning" alignment="TOP_LEFT" minHeight="50.0" minWidth="314.0" prefHeight="18.0" prefWidth="0.0" textFill="RED">
                <HBox.margin>
-                  <Insets left="20.0" top="-40.0" />
+                  <Insets left="20.0" top="-35.0" />
                </HBox.margin>
             </Label>
             <Button fx:id="registerButton" minHeight="35.0" mnemonicParsing="false" onAction="#registerButtonOnClick" prefHeight="22.0" prefWidth="78.0" text="Registruj se">
@@ -107,5 +91,18 @@
             <Insets top="20.0" />
          </GridPane.margin>
       </HBox>
+      <Label prefHeight="30.0" prefWidth="153.0" text="Registrujte se" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="220.0" top="30.0" />
+         </GridPane.margin>
+      </Label>
+      <PasswordField fx:id="passwordField" promptText="Password *" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="50.0" top="5.0" />
+         </GridPane.margin>
+      </PasswordField>
    </children>
 </GridPane>
