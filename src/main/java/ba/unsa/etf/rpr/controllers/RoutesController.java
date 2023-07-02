@@ -9,10 +9,17 @@ import ba.unsa.etf.rpr.domain.RouteFavourite;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class RoutesController {
     private final RouteManager routeManager = new RouteManager();
@@ -132,6 +139,16 @@ public class RoutesController {
         removeButton.setDisable(true);
     }
 
-    public void backButtonOnClick(ActionEvent actionEvent) {
+    public void backButtonOnClick(ActionEvent actionEvent) throws AppException, IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashboard.fxml"));
+        loader.setController(new DashboardController(profileManager.getById(userId).getEmail()));
+        stage.setTitle("JavniPrevozKS");
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("img/icon.png"));
+        stage.show();
+        Stage currentStage = (Stage) backButton.getScene().getWindow();
+        currentStage.close();
     }
 }
