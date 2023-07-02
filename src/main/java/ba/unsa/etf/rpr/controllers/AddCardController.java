@@ -26,6 +26,16 @@ public class AddCardController {
     @FXML
     public void initialize(){
         choiceBox.getItems().addAll("Studentska", "Srednja škola", "Osnovna škola", "Radnička", "Penzionerska", "Ostali");
+        choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !serialNumberField.getText().equals("")) {
+                addButton.setDisable(false);
+            }
+        });
+        serialNumberField.textProperty().addListener((obs, oldValue, newValue)->{
+            if(!newValue.equals("") && choiceBox.getValue() != null) {
+                addButton.setDisable(false);
+            }
+        });
     }
 
     private boolean validateSerialNumber(String input){
@@ -34,6 +44,7 @@ public class AddCardController {
     }
 
     public void addButtonOnClick(ActionEvent actionEvent) {
+
     }
 
     public void cancelButtonOnClick(ActionEvent actionEvent) {
