@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.RouteFavouriteManager;
 import ba.unsa.etf.rpr.business.RouteManager;
 import ba.unsa.etf.rpr.domain.Card;
 import ba.unsa.etf.rpr.domain.Route;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class RoutesController {
     private final RouteManager routeManager = new RouteManager();
+    private final RouteFavouriteManager routeFavouriteManager = new RouteFavouriteManager();
     public ListView<String> routesList;
     public Label relationLabel;
     public Label frequencyLabel;
@@ -47,6 +49,18 @@ public class RoutesController {
         routesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 relationLabel.setText(newValue);
+                try {
+                    if(routeFavouriteManager.checkForRoute(userId, routeManager.getByName(routesList.getSelectionModel().getSelectedItem()).getId())){
+                        addButton.setDisable(true);
+                        removeButton.setDisable(false);
+                    }
+                    else{
+                        addButton.setDisable(false);
+                        removeButton.setDisable(true);
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                }
                 try {
                     if(workDaysRadioButton.isSelected()) {
                         frequencyLabel.setText("Frekventnost: " + routeManager.getByName(newValue).getFrequency());
@@ -99,7 +113,7 @@ public class RoutesController {
         return "";
     }
 
-    public void addButtonOnClick(ActionEvent actionEvent) {
+    public void addButtonOnClick(ActionEvent actionEvent) throws AppException {
 
     }
 
