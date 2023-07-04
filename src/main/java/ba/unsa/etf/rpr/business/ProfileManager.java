@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.business;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Profile;
 import ba.unsa.etf.rpr.exceptions.AppException;
+import com.mysql.cj.log.ProfilerEvent;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class ProfileManager {
      * @param password - entered password on registration screen
      * @param email - entered email on registration screen
      */
-    public void addToDatabase(String name, String surname, String password, String email) throws AppException {
-        DaoFactory.profilesDao().add(new Profile(-1, name, surname, password, email, null, null));
+    public Profile addToDatabase(String name, String surname, String password, String email) throws AppException {
+        return DaoFactory.profilesDao().add(new Profile(-1, name, surname, password, email, null, null));
     }
 
     /**
