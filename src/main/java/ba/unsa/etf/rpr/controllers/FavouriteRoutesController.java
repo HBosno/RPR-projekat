@@ -3,11 +3,9 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.ProfileManager;
 import ba.unsa.etf.rpr.business.RouteFavouriteManager;
 import ba.unsa.etf.rpr.business.RouteManager;
-import ba.unsa.etf.rpr.domain.Route;
 import ba.unsa.etf.rpr.domain.RouteFavourite;
 import ba.unsa.etf.rpr.domain.TimeTable;
 import ba.unsa.etf.rpr.exceptions.AppException;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +17,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +32,7 @@ public class FavouriteRoutesController {
     private final RouteManager routeManager = new RouteManager();
     private final ProfileManager profileManager = new ProfileManager();
     public ListView<RouteFavourite> routesList;
-    public Label relationLabel;
 
-    public Label frequencyTable;
     public Button backButton;
     public Button removeButton;
 
@@ -47,9 +41,7 @@ public class FavouriteRoutesController {
     public TableColumn startColumn;
 
     public TableColumn endColumn;
-    private String hours = "06";
 
-    private String minutes = "00";
     private int userId;
 
     /**
@@ -74,10 +66,10 @@ public class FavouriteRoutesController {
         routesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 startColumn.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("start"));
-                endColumn.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("end"));
+            //    endColumn.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("end"));
                 List<TimeTable> dummyList = null;
                 try {
-                    dummyList = generisiListu(300, 1000, frequencyToMinutes(newValue.getRoute().getFrequency()));
+                    dummyList = generisiListu(300, 1380, frequencyToMinutes(newValue.getRoute().getFrequency()));
                 } catch (AppException e) {
                     throw new RuntimeException(e);
                 }
