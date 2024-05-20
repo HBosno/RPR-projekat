@@ -18,7 +18,7 @@ import java.util.TreeMap;
 public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> implements RoutesFavouritesDao {
     private static RoutesFavouritesDaoSQLImpl instance = null;
     private RoutesFavouritesDaoSQLImpl() {
-        super("routesFavourites");
+        super("routes_favourites");
     }
 
     public static RoutesFavouritesDaoSQLImpl getInstance(){
@@ -73,7 +73,7 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
     @Override
     public boolean checkForRoute(int profileId, int routeId){
         try{
-            executeQueryUnique("SELECT * FROM routesFavourites WHERE profile_id = ? AND route_id = ?", new Object[]{profileId, routeId});
+            executeQueryUnique("SELECT * FROM routes_favourites WHERE profile_id = ? AND route_id = ?", new Object[]{profileId, routeId});
             return true;
         }
         catch(AppException e){
@@ -89,7 +89,7 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
      */
     @Override
     public RouteFavourite getRoute(int profileId, int routeId) throws AppException {
-        return executeQueryUnique("SELECT * FROM routesFavourites WHERE profile_id = ? AND route_id = ?", new Object[]{profileId, routeId});
+        return executeQueryUnique("SELECT * FROM routes_favourites WHERE profile_id = ? AND route_id = ?", new Object[]{profileId, routeId});
     }
 
     /**
@@ -99,6 +99,6 @@ public class RoutesFavouritesDaoSQLImpl extends AbstractDao<RouteFavourite> impl
      */
     @Override
     public List<RouteFavourite> getAllForUser(int userId) throws AppException {
-        return executeQuery("SELECT * FROM routesFavourites WHERE profile_id = ?", new Object[]{userId});
+        return executeQuery("SELECT * FROM routes_favourites WHERE profile_id = ?", new Object[]{userId});
     }
 }

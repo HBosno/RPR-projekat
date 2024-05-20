@@ -5,16 +5,22 @@ import ba.unsa.etf.rpr.business.RouteFavouriteManager;
 import ba.unsa.etf.rpr.business.RouteManager;
 import ba.unsa.etf.rpr.domain.Route;
 import ba.unsa.etf.rpr.domain.RouteFavourite;
+import ba.unsa.etf.rpr.domain.TimeTable;
 import ba.unsa.etf.rpr.exceptions.AppException;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +35,21 @@ public class FavouriteRoutesController {
     private final RouteFavouriteManager routeFavouriteManager = new RouteFavouriteManager();
     private final RouteManager routeManager = new RouteManager();
     private final ProfileManager profileManager = new ProfileManager();
-    public ListView<String> routesList;
+    public ListView<RouteFavourite> routesList;
     public Label relationLabel;
-    public Label frequencyLabel;
-    public RadioButton workDaysRadioButton;
-    public RadioButton weekendRadioButton;
+
+    public Label frequencyTable;
     public Button backButton;
     public Button removeButton;
+
+    public TableView timetable;
+
+    public TableColumn startColumn;
+
+    public TableColumn endColumn;
+    private String hours = "06";
+
+    private String minutes = "00";
     private int userId;
 
     /**
@@ -54,83 +68,52 @@ public class FavouriteRoutesController {
     @FXML
     public void initialize() throws AppException {
         List<RouteFavourite> favouriteRoutes = routeFavouriteManager.getAllForUser(userId);
-        List<Integer> routeIds = new ArrayList<>();
-        for(RouteFavourite route: favouriteRoutes){
-            routeIds.add(route.getRoute().getId());
-        }
-        List<String> routeNames = new ArrayList<>();
-        for(Integer id: routeIds){
-            routeNames.add(routeManager.getById(id).getRoute());
-        }
-        routesList.getItems().addAll(routeNames);
-        workDaysRadioButton.setSelected(true);
-        ToggleGroup toggleGroup = new ToggleGroup();
-        workDaysRadioButton.setToggleGroup(toggleGroup);
-        weekendRadioButton.setToggleGroup(toggleGroup);
-        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                oldValue.setSelected(true);
-            }
-        });
+        routesList.getItems().addAll(favouriteRoutes);
+
+
         routesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                relationLabel.setText(newValue);
+                startColumn.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("start"));
+                endColumn.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("end"));
+                List<TimeTable> dummyList = null;
+                try {
+                    dummyList = generisiListu(300, 1000, frequencyToMinutes(newValue.getRoute().getFrequency()));
+                } catch (AppException e) {
+                    throw new RuntimeException(e);
+                }
+
+                timetable.setItems(FXCollections.observableList(dummyList));
                 removeButton.setDisable(false);
-                try {
-                    if(workDaysRadioButton.isSelected()) {
-                        frequencyLabel.setText("Frekventnost: " + routeManager.getByName(newValue).getFrequency());
-                    }
-                    else{
-                        frequencyLabel.setText("Frekventnost: " + newFrequency(routeManager.getByName(newValue).getFrequency()));
-                    }
-                } catch (AppException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        weekendRadioButton.setOnAction(event -> {
-            String selectedRoute = routesList.getSelectionModel().getSelectedItem();
-            if(selectedRoute != null){
-                try {
-                    frequencyLabel.setText("Frekventnost: " + newFrequency(routeManager.getByName(selectedRoute).getFrequency()));
-                } catch (AppException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        workDaysRadioButton.setOnAction(event -> {
-            String selectedRoute = routesList.getSelectionModel().getSelectedItem();
-            if(selectedRoute != null){
-                try {
-                    frequencyLabel.setText("Frekventnost: " + routeManager.getByName(selectedRoute).getFrequency());
-                } catch (AppException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }
 
-    /**
-     * Private utility method for updating frequency info if weekends radio button is selected.
-     * @param frequency - old frequency
-     * @return new frequency string
-     */
-    private String newFrequency(String frequency){
-        switch(frequency){
-            case "5 min":
-                return "20 min";
-            case "15 min":
-                return "30 min";
-            case "30 min":
-                return "1 h";
-            case "45 min":
-                return "1h 30 min";
-            case "55 min":
-                return "2 h";
-            case "1 h":
-                return "1 h 30 min";
+    private List<TimeTable> generisiListu(int start, int end, int frequency){
+        List<TimeTable> list = new ArrayList<>();
+        for(int i = start; i<end; i+=frequency){
+            list.add(new TimeTable(minutesToTime(i), minutesToTime(i+frequency)));
         }
-        return "";
+        return list;
+    }
+
+    private int frequencyToMinutes(String frequency) throws AppException {
+        if(frequency.contains("min") && frequency.contains("h")){
+            String[] array = frequency.split(" ");
+            return Integer.parseInt(array[0])*60 + Integer.parseInt(array[2]);
+        }
+        else if(frequency.contains("min")){
+            return Integer.parseInt(frequency.replaceAll("min", "").trim());
+        }
+        else if(frequency.contains("h")){
+            return Integer.parseInt(frequency.replaceAll("h", "").trim())*60;
+        }
+        throw new AppException("Invalid frequency");
+    }
+
+    private String minutesToTime(int minutes){
+        int hours = minutes/60;
+        minutes = minutes%60;
+        return hours + ":" + minutes;
     }
 
     /**
@@ -153,9 +136,8 @@ public class FavouriteRoutesController {
      * On click listener method for remove button. Removes route from favourites.
      */
     public void removeButtonOnClick(ActionEvent actionEvent) throws AppException {
-        String selectedRoute = routesList.getSelectionModel().getSelectedItem();
-        RouteFavourite favouriteRoute = routeFavouriteManager.getRoute(userId, routeManager.getByName(selectedRoute).getId());
-        routeFavouriteManager.deleteRoute(favouriteRoute.getId());
+        RouteFavourite selectedRoute = routesList.getSelectionModel().getSelectedItem();
+        routeFavouriteManager.deleteRoute(selectedRoute.getId());
         routesList.getItems().remove(selectedRoute);
         removeButton.setDisable(true);
     }

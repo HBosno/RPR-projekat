@@ -79,13 +79,12 @@ public class Card implements Idable, Serializable{
 
     @Override
     public String toString() {
-        return "Card{" +
+        return "Kartica{" +
                 "id=" + id +
-                ", serial number=" + serialNumber +
-                ", card type=" + cardType +
-                ", balance=" + balance +
-                ", monthly coupon=" + monthlyCoupon +
-                ", profile =" + profile +
+                ", serijski broj=" + serialNumber +
+                ", vrsta kartice=" + cardType +
+                ", stanje=" + balance +
+                ", mjesečni kupon=" + monthlyCoupon +
                 '}';
     }
 

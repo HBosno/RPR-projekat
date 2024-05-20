@@ -16,18 +16,18 @@ public class Profile implements Idable, Serializable{
     private String surname;
     private String password;
     private String email;
-    private String adress;
+    private String address;
     private String telephoneNumber;
 
     public Profile(){}
 
-    public Profile(int id, String name, String surname, String password, String email, String adress, String telephoneNumber) {
+    public Profile(int id, String name, String surname, String password, String email, String address, String telephoneNumber) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.email = email;
-        this.adress = adress;
+        this.address = address;
         this.telephoneNumber = telephoneNumber;
     }
 
@@ -55,8 +55,8 @@ public class Profile implements Idable, Serializable{
         return email;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
     public String getTelephoneNumber() {
@@ -79,8 +79,8 @@ public class Profile implements Idable, Serializable{
         this.email = email;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setTelephoneNumber(String telephoneNumber) {
@@ -94,7 +94,7 @@ public class Profile implements Idable, Serializable{
                 ", name=" + name +
                 ", surname=" + surname +
                 ", email=" + email +
-                ", adress=" + adress +
+                ", address=" + address +
                 ", telephone number=" + telephoneNumber +
                 '}';
     }
@@ -109,6 +109,6 @@ public class Profile implements Idable, Serializable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, password, email, adress, telephoneNumber);
+        return Objects.hash(id, name, surname, password, email, address, telephoneNumber);
     }
 }

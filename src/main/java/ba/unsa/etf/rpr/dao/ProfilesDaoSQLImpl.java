@@ -48,7 +48,7 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
             profile.setSurname(rs.getString("surname"));
             profile.setPassword(rs.getString("password"));
             profile.setEmail(rs.getString("email"));
-            profile.setAdress(rs.getString("adress"));
+            profile.setAddress(rs.getString("address"));
             profile.setTelephoneNumber(rs.getString("telephone_number"));
             return profile;
         } catch (SQLException e) {
@@ -69,7 +69,7 @@ public class ProfilesDaoSQLImpl extends AbstractDao<Profile> implements Profiles
         map.put("surname", object.getSurname());
         map.put("password", object.getPassword());
         map.put("email", object.getEmail());
-        map.put("adress", object.getAdress());
+        map.put("address", object.getAddress());
         map.put("telephone_number", object.getTelephoneNumber());
         return map;
     }

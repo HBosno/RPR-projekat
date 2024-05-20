@@ -49,11 +49,7 @@ public class RouteFavourite implements Idable, Serializable{
 
     @Override
     public String toString() {
-        return "RouteFavourite{" +
-                "id=" + id +
-                ", profile=" + profile +
-                ", route=" + route +
-                '}';
+        return getRoute().getRoute();
     }
 
     @Override

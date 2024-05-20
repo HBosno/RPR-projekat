@@ -1,11 +1,16 @@
 package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.dao.ProfilesDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Profile;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ProfileManagerTest {
 
@@ -104,5 +109,23 @@ class ProfileManagerTest {
         Profile profileFoundByEmail = profileManager.getProfileByEmail("randomemail1231###$$@msn.com");
         assertNull(profileFoundByEmail);
     }
+
+    /*
+    mockito tests work in progress
+    @Test
+    void mocking() throws AppException {
+        MockedStatic<DaoFactory> mockedFactory = Mockito.mockStatic(DaoFactory.class);
+        ProfilesDaoSQLImpl profilesDaoSQLMock = Mockito.mock(ProfilesDaoSQLImpl.class);
+        mockedFactory.when(DaoFactory::profilesDao).thenReturn(profilesDaoSQLMock);
+
+        Profile profileMock = mock(Profile.class);
+        when(daoFactoryMock.profilesDao().findProfileByEmail("example@example.com")).thenReturn(profileMock);
+        when(profileMock.getPassword()).thenReturn("password123");
+        ProfileManager profileManager = new ProfileManager();
+        profileManager.setDaoFactory(daoFactoryMock);
+        assertTrue(profileManager.validateLogin("example@example.com","password123"));
+    }
+
+     */
 
 }

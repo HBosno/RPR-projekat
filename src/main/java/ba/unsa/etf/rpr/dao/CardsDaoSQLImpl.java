@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.domain.Card;
 import ba.unsa.etf.rpr.domain.CardType;
 import ba.unsa.etf.rpr.exceptions.AppException;

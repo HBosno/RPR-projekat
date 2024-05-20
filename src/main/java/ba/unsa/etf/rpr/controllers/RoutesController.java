@@ -129,6 +129,8 @@ public class RoutesController {
                 return "20 min";
             case "15 min":
                 return "30 min";
+            case "20 min":
+                return "50 min";
             case "30 min":
                 return "1 h";
             case "45 min":

@@ -46,7 +46,7 @@ public class ProfileController {
         emailField.setText(user.getEmail());
         nameField.setText(user.getName());
         surnameField.setText(user.getSurname());
-        adressField.setText(user.getAdress());
+        adressField.setText(user.getAddress());
         telephoneField.setText(user.getTelephoneNumber());
         emailField.setOnKeyTyped(e -> confirmButton.setDisable(false));
         nameField.setOnKeyTyped(e -> confirmButton.setDisable(false));
@@ -65,7 +65,7 @@ public class ProfileController {
             user.setEmail(emailField.getText());
             user.setName(nameField.getText());
             user.setSurname(surnameField.getText());
-            user.setAdress(adressField.getText());
+            user.setAddress(adressField.getText());
             user.setTelephoneNumber(telephoneField.getText());
             profileManager.updateProfile(user);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
