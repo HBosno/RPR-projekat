@@ -89,7 +89,7 @@ public class RoutesController {
                         frequencyLabel.setText("Frekventnost: " + routeManager.getByName(newValue).getFrequency());
                     }
                     else{
-                        frequencyLabel.setText("Frekventnost: " + newFrequency(routeManager.getByName(newValue).getFrequency()));
+                        frequencyLabel.setText("Frekventnost: " + weekendFrequency(routeManager.getByName(newValue).getFrequency()));
                     }
                 } catch (AppException e) {
                     e.printStackTrace();
@@ -100,7 +100,7 @@ public class RoutesController {
             String selectedRoute = routesList.getSelectionModel().getSelectedItem();
             if(selectedRoute != null){
                 try {
-                    frequencyLabel.setText("Frekventnost: " + newFrequency(routeManager.getByName(selectedRoute).getFrequency()));
+                    frequencyLabel.setText("Frekventnost: " + weekendFrequency(routeManager.getByName(selectedRoute).getFrequency()));
                 } catch (AppException e) {
                     e.printStackTrace();
                 }
@@ -123,7 +123,7 @@ public class RoutesController {
      * @param frequency - old frequency
      * @return new frequency string
      */
-    private String newFrequency(String frequency){
+    private String weekendFrequency(String frequency){
         switch(frequency){
             case "5 min":
                 return "20 min";

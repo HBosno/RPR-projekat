@@ -40,6 +40,10 @@ public class FavouriteRoutesController {
 
     public TableColumn startColumn;
 
+    public RadioButton workDaysRadioButton;
+
+    public RadioButton weekendRadioButton;
+
     public TableColumn endColumn;
 
     private int userId;
@@ -62,22 +66,68 @@ public class FavouriteRoutesController {
         List<RouteFavourite> favouriteRoutes = routeFavouriteManager.getAllForUser(userId);
         routesList.getItems().addAll(favouriteRoutes);
 
+        startColumn.setCellValueFactory(new PropertyValueFactory<>("start"));
+        workDaysRadioButton.setSelected(true);
+        ToggleGroup toggleGroup = new ToggleGroup();
+        workDaysRadioButton.setToggleGroup(toggleGroup);
+        weekendRadioButton.setToggleGroup(toggleGroup);
+
+        // Listener for toggle group's selected toggle property
+        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Update timetable immediately when the toggle changes
+                updateTimetable();
+            }
+        });
 
         routesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                startColumn.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("start"));
-            //    endColumn.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("end"));
-                List<TimeTable> dummyList = null;
-                try {
-                    dummyList = generisiListu(300, 1380, frequencyToMinutes(newValue.getRoute().getFrequency()));
-                } catch (AppException e) {
-                    throw new RuntimeException(e);
-                }
-
-                timetable.setItems(FXCollections.observableList(dummyList));
+                // Update timetable when a route is selected
+                updateTimetable();
                 removeButton.setDisable(false);
             }
         });
+    }
+
+    // Method to update timetable based on selected route and radio button
+    private void updateTimetable() {
+        System.out.println("Updating timetable..."); // Debug
+        RouteFavourite selectedRoute = routesList.getSelectionModel().getSelectedItem();
+        if (selectedRoute != null) {
+            int frequency;
+            try {
+                if (workDaysRadioButton.isSelected()) {
+                    frequency = frequencyToMinutes(selectedRoute.getRoute().getFrequency());
+                } else {
+                    frequency = frequencyToMinutes(weekendFrequency(selectedRoute.getRoute().getFrequency()));
+                }
+                List<TimeTable> timetableData = generisiListu(300, 1380, frequency);
+                System.out.println("Timetable data size: " + timetableData.size()); // Debug
+                timetable.setItems(FXCollections.observableList(timetableData));
+            } catch (AppException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private String weekendFrequency(String frequency){
+        switch(frequency){
+            case "5 min":
+                return "20 min";
+            case "15 min":
+                return "30 min";
+            case "20 min":
+                return "50 min";
+            case "30 min":
+                return "1 h";
+            case "45 min":
+                return "1h 30 min";
+            case "55 min":
+                return "2 h";
+            case "1 h":
+                return "1 h 30 min";
+        }
+        return "";
     }
 
     private List<TimeTable> generisiListu(int start, int end, int frequency){
