@@ -51,7 +51,7 @@ public class FavouriteRoutesController {
         userId = id;
         RouteFavouriteManager routeFavouriteManager = new RouteFavouriteManager();
         ProfileManager profileManager = new ProfileManager();
-        TimeTableGenerator timeTableGenerator = new BasicTimeTableGenerator();
+        TimeTableGenerator timeTableGenerator = new TimeTableGenerator();
         this.facade = new TransportSystemFacade(routeFavouriteManager, profileManager, timeTableGenerator);
     }
 
