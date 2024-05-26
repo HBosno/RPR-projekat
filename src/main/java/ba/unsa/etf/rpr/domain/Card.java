@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Hamza Bosno
  */
 
-public class Card implements Idable, Serializable{
+public abstract class Card implements Idable, Serializable{
 
     private int id;
     private int serialNumber;
@@ -100,4 +100,9 @@ public class Card implements Idable, Serializable{
     public int hashCode() {
         return Objects.hash(id, serialNumber, cardType, balance, monthlyCoupon, profile);
     }
+
+    public abstract double getMonthlyCost();
+    public abstract String getDescription();
+    public abstract boolean balanceNegative();
+    public abstract double newBalance();
 }

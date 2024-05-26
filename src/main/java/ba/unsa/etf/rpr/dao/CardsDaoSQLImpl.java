@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.BasicCard;
 import ba.unsa.etf.rpr.domain.Card;
 import ba.unsa.etf.rpr.domain.CardType;
 import ba.unsa.etf.rpr.exceptions.AppException;
@@ -41,7 +42,7 @@ public class CardsDaoSQLImpl extends AbstractDao<Card> implements CardsDao{
     @Override
     public Card row2object(ResultSet rs) throws AppException {
         try {
-            Card card = new Card();
+            Card card = new BasicCard(-1, -1, null, 0, false, null);
             card.setId(rs.getInt("id"));
             card.setSerialNumber(rs.getInt("serial_number"));
             card.setCardType(CardType.valueOf(rs.getString("card_type")));

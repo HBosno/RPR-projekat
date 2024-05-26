@@ -155,7 +155,7 @@ public class App {
                                     System.out.println("Pogrešan unos. Pokušajte ponovo.");
                                     continue;
                                 }
-                                cardManager.addCard(new Card(-1, serialNumber, cardType, 0.0, false, loggedUser));
+                 //               cardManager.addCard(new Card(-1, serialNumber, cardType, 0.0, false, loggedUser));
                                 break;
                             }
                             break;

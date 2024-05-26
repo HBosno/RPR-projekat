@@ -2,9 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.CardManager;
 import ba.unsa.etf.rpr.business.ProfileManager;
-import ba.unsa.etf.rpr.domain.Card;
-import ba.unsa.etf.rpr.domain.CardType;
-import ba.unsa.etf.rpr.domain.Profile;
+import ba.unsa.etf.rpr.domain.*;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,6 +38,7 @@ public class CardsController {
     public Button addCardButton;
     public Button backButton;
     public Button removeCardButton;
+    public boolean enableNotifications = false;
     private Profile user;
 
     /**
@@ -69,9 +68,13 @@ public class CardsController {
                     activateCouponButton.setDisable(false);
                     depositButton.setDisable(false);
                     Card card = cardManager.getCard(Integer.parseInt(newValue));
+                    Card selectedCard = new BasicCard(card.getId(), card.getSerialNumber(), card.getCardType(), card.getBalance(), card.isMonthlyCoupon(), card.getProfile());
+                    if (selectedCard.getCardType() == CardType.STUDENT) {
+                        selectedCard = new DiscountedCard(selectedCard, 0.10); // 10% discount for students
+                    }
                     serialNumberField.setText(newValue);
-                    cardTypeField.setText(determineCategory(card.getCardType().toString()));
-                    if(card.isMonthlyCoupon()) {
+                    cardTypeField.setText(selectedCard.getDescription());
+                    if(selectedCard.isMonthlyCoupon()) {
                         couponField.setText("Aktiviran");
                         activateCouponButton.setDisable(true);
                     }
@@ -79,7 +82,7 @@ public class CardsController {
                         couponField.setText("Neaktiviran");
                         activateCouponButton.setDisable(false);
                     }
-                    balanceField.setText(String.valueOf(card.getBalance()) + " KM");
+                    balanceField.setText(String.valueOf(selectedCard.getBalance()) + " KM");
                 } catch (AppException ex) {
                     ex.printStackTrace();
                 }
@@ -90,27 +93,6 @@ public class CardsController {
                 depositButton.setDisable(true);
             }
         });
-    }
-
-    /**
-     * Utility function for determining display name for category label.
-     * @param category - enum to string value from db
-     * @return display name string
-     */
-    private String determineCategory(String category){
-        switch(category){
-            case "STUDENT":
-                return "Studentska";
-            case "HIGH_SCHOOL":
-                return "Srednja škola";
-            case "ELEMENTARY":
-                return "Osnovna škola";
-            case "WORKER":
-                return "Radnička";
-            case "PENSIONER":
-                return "Penzionerska";
-        }
-        return "Ostali";
     }
 
     /**
@@ -165,8 +147,16 @@ public class CardsController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             String selectedItem = cardsList.getSelectionModel().getSelectedItem();
-            Card selectedCard = cardManager.getCard(Integer.parseInt(selectedItem));
-            if(balanceNegative(selectedCard.getCardType(), selectedCard.getBalance())){
+            Card card = cardManager.getCard(Integer.parseInt(selectedItem));
+
+            // Wrap the card with a DiscountedCard decorator if needed
+            Card selectedCard = new BasicCard(card.getId(), card.getSerialNumber(), card.getCardType(), card.getBalance(), card.isMonthlyCoupon(), card.getProfile());
+            if (selectedCard.getCardType() == CardType.STUDENT) {
+                selectedCard = new DiscountedCard(selectedCard, 0.10); // 10% discount for students
+            }
+
+            selectedCard = new NotificationCard(selectedCard, user.getEmail());
+            if(selectedCard.balanceNegative()){
                 Alert alert1 = new Alert(Alert.AlertType.ERROR);
                 alert1.setTitle("Greška");
                 alert1.setHeaderText("Greška pri aktivaciji");
@@ -176,8 +166,15 @@ public class CardsController {
                 alert1.showAndWait();
             }
             else{
-                selectedCard.setBalance(newBalance(selectedCard.getCardType(), selectedCard.getBalance()));
+                selectedCard.setBalance(selectedCard.newBalance());
                 selectedCard.setMonthlyCoupon(true);
+                if(enableNotifications) {
+                    NotificationCard notificationCard = new NotificationCard(selectedCard, user.getEmail());
+                    notificationCard.sendCouponActivatedNotification();
+                    if (notificationCard.getBalance() < 16) {
+                        notificationCard.sendLowBalanceNotification();
+                    }
+                }
                 couponField.setText("Aktiviran");
                 activateCouponButton.setDisable(true);
                 cardManager.updateCard(selectedCard);
@@ -191,46 +188,6 @@ public class CardsController {
                 alert2.showAndWait();
             }
         }
-    }
-
-    /**
-     * Utility method for determining if user has sufficient funds for coupon activation.
-     * @param type - card type
-     * @param balance - balance on card
-     * @return true if user doesn't have sufficient funds, true otherwise
-     */
-    private boolean balanceNegative(CardType type, double balance){
-        switch(type){
-            case STUDENT:
-            case PENSIONER:
-                return (balance - 20) < 0;
-            case HIGH_SCHOOL:
-            case ELEMENTARY:
-                return (balance - 16) < 0;
-            case WORKER:
-                return (balance - 25) < 0;
-        }
-        return (balance - 23) < 0;
-    }
-
-    /**
-     * Utility method for determining the new balance after transaction is done, based on card type.
-     * @param type - card type
-     * @param balance - balance on card
-     * @return new card balance
-     */
-    private double newBalance(CardType type, double balance){
-        switch(type){
-            case STUDENT:
-            case PENSIONER:
-                return balance - 20;
-            case HIGH_SCHOOL:
-            case ELEMENTARY:
-                return balance - 16;
-            case WORKER:
-                return balance - 25;
-        }
-        return balance - 23;
     }
 
     public void addCardButtonOnClick(ActionEvent actionEvent) throws IOException {

@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.CardManager;
 import ba.unsa.etf.rpr.business.ProfileManager;
+import ba.unsa.etf.rpr.domain.BasicCard;
 import ba.unsa.etf.rpr.domain.Card;
 import ba.unsa.etf.rpr.domain.CardType;
 import ba.unsa.etf.rpr.domain.Profile;
@@ -68,7 +69,7 @@ public class AddCardController {
      */
     public void addButtonOnClick(ActionEvent actionEvent){
         if(validateSerialNumber(serialNumberField.getText()) && !cardManager.cardExists(Integer.parseInt(serialNumberField.getText()))){
-            Card card = new Card (-1, Integer.parseInt(serialNumberField.getText()), determineCategory(choiceBox.getValue()), 0, false, user);
+            Card card = new BasicCard(-1, Integer.parseInt(serialNumberField.getText()), determineCategory(choiceBox.getValue()), 0, false, user);
             try {
                 cardManager.addCard(card);
             } catch (AppException e) {
